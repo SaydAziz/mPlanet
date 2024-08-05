@@ -82,7 +82,7 @@ namespace mPlanet
         {
             var data = new
             {
-                ScanDate = DateTime.Now,
+                ScanDate = $"{DateTime.Now:ddMMyyyy}",
                 Tags = scannedTags
             };
 
@@ -111,7 +111,7 @@ namespace mPlanet
                 {
                     var data = new
                     {
-                        ScanDate = DateTime.Now,
+                        ScanDate = $"{DateTime.Now:dd.MM.yyyy}",
                         Tags = scannedTags
                     };
 
