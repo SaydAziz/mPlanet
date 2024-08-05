@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Net;
 using MegawareDLL;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace mPlanet
 {
@@ -28,12 +18,16 @@ namespace mPlanet
         private MegawareMHand mHandScanner;
         private ObservableCollection<TagInfo> scannedTags;
 
+        private HttpListener apiListener;
+        private const string url = "http://localhost:8080/tags/";
+
         public MainWindow()
         {
             InitializeComponent();
             mHandScanner = new MegawareMHand();
             scannedTags = new ObservableCollection<TagInfo>();
             scannedTagsListView.ItemsSource = scannedTags;
+            StartServer();
         }
 
         private void UpdateScannedTags()
@@ -98,6 +92,74 @@ namespace mPlanet
             File.WriteAllText(fileName, jsonData);
 
             MessageBox.Show($"Data exported successfully to {fileName}");
+        }
+
+        private async void StartServer()
+        {
+            apiListener = new HttpListener();
+            apiListener.Prefixes.Add(url);
+            apiListener.Start();
+            Console.WriteLine("Listening...");
+
+            while (true)
+            {
+                HttpListenerContext context = await apiListener.GetContextAsync();
+                HttpListenerRequest request = context.Request;
+                HttpListenerResponse response = context.Response;
+
+                if (request.HttpMethod == "GET" && request.Url.AbsolutePath == "/tags")
+                {
+                    var data = new
+                    {
+                        ScanDate = DateTime.Now,
+                        Tags = scannedTags
+                    };
+
+                    string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+                    byte[] buffer = Encoding.UTF8.GetBytes(jsonData);
+                    response.ContentLength64 = buffer.Length;
+                    response.ContentType = "application/json";
+                    await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+
+                }
+
+                response.Close();
+            }
+        }
+
+        private void btnTestData_Click(object sender, RoutedEventArgs e)
+        {
+            string[] fakeData = new string[6];
+            fakeData[0] = "3000-123456789012345678901234,6196";
+            fakeData[1] = "3003-123456789012345678901234,2196";
+            fakeData[2] = "3010-123456789012345678901234,1196";
+            fakeData[3] = "2000-123456789012345678901234,6198";
+            fakeData[4] = "7000-123456789012345678901234,7197";
+            fakeData[5] = "9000-123456789012345678901234,6196";
+
+            string[] scannedEPCs = fakeData;
+
+            foreach (string TagInfo in scannedEPCs)
+            {
+                string[] tagParts = TagInfo.Split('-', ',');
+                if (tagParts.Length >= 3)
+                {
+                    TagInfo tag = new TagInfo(
+                       pc: tagParts[0],
+                       epc: tagParts[1],
+                       rssi: tagParts[2]
+                    );
+
+                    if (!scannedTags.Contains(tag))
+                    {
+                        scannedTags.Add(tag);
+                    }
+                }
+            }
+
+            scannedTagsListView.ItemsSource = null;
+            scannedTagsListView.ItemsSource = scannedTags;
         }
     }
 }

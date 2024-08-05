@@ -18,6 +18,7 @@
         <Button Name="btnConnect" Content="Connect mHand" Click="btnConnect_Click" HorizontalAlignment="Left" Margin="440,65,0,0" VerticalAlignment="Top" Height="21" Width="120"/>
         <Button Name="btnStartScan" Content="Fetch Scans" Click="btnFetchScan_Click"  HorizontalAlignment="Left" Margin="440,110,0,0" VerticalAlignment="Top" Height="66" Width="120"/>
         <Button Name="btnExport" Content="Export" Click="btnExport_Click"  HorizontalAlignment="Left" Margin="440,201,0,0" VerticalAlignment="Top" Height="22" Width="120"/>
+        <Button Name="btnTestData" Content="Test Data" Click="btnTestData_Click"  HorizontalAlignment="Left" Margin="440,246,0,0" VerticalAlignment="Top" Height="22" Width="120"/>
         <TextBox Name="txtConnectionPort" HorizontalAlignment="Left" Margin="440,29,0,0" TextWrapping="Wrap" Text="COM PORT HERE" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
