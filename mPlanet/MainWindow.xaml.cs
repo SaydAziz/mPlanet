@@ -24,6 +24,8 @@ namespace mPlanet
         public MainWindow()
         {
             InitializeComponent();
+            scannedTagsListView.SizeChanged += ListView_SizeChanged;
+
             mHandScanner = new MegawareMHand();
             scannedTags = new ObservableCollection<TagInfo>();
             scannedTagsListView.ItemsSource = scannedTags;
@@ -60,13 +62,20 @@ namespace mPlanet
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
             string comPort = txtConnectionPort.Text;
-            if (mHandScanner.connect(comPort))      
+            if (comPort != "")
             {
-                MessageBox.Show($"Connection to {comPort} successful.");
+                if (mHandScanner.connect(comPort))
+                {
+                    MessageBox.Show($"Подключение к COM-порт {comPort} успешно.");
+                }
+                else
+                {
+                    MessageBox.Show($"Подключение к COM-порт {comPort} не удалось.");
+                }
             }
             else
             {
-                MessageBox.Show($"Connection to {comPort} unsuccessful.");
+                MessageBox.Show("Пожалуйста, введите COM-порт.");
             }
         }
 
@@ -91,7 +100,7 @@ namespace mPlanet
             string fileName = $"RFID_Scan_{DateTime.Now:yyyyMMddHHmmss}.json";
             File.WriteAllText(fileName, jsonData);
 
-            MessageBox.Show($"Data exported successfully to {fileName}");
+            MessageBox.Show($"Данные успешно экспортированы в {fileName}");
         }
 
         private async void StartServer()
@@ -160,6 +169,32 @@ namespace mPlanet
 
             scannedTagsListView.ItemsSource = null;
             scannedTagsListView.ItemsSource = scannedTags;
+        }
+
+        private void ListView_SizeChanged(Object sender, SizeChangedEventArgs e)
+        {
+            // Define minimum widths for the columns
+            double minEpcColumnWidth = 200;
+            double minRssiColumnWidth = 120;
+
+            // Calculate the remaining width after subtracting the widths of other elements
+            double remainingWidth = scannedTagsListView.ActualWidth - SystemParameters.VerticalScrollBarWidth;
+
+            // Ensure there's at least some space to allocate
+            if (remainingWidth > (minEpcColumnWidth + minRssiColumnWidth))
+            {
+                // Distribute the remaining width equally between the columns
+                double newWidth = remainingWidth / 2;
+
+                epcColumn.Width = newWidth > minEpcColumnWidth ? newWidth : minEpcColumnWidth;
+                rssiColumn.Width = newWidth > minRssiColumnWidth ? newWidth : minRssiColumnWidth;
+            }
+            else
+            {
+                // If not enough space, use the minimum widths
+                epcColumn.Width = minEpcColumnWidth;
+                rssiColumn.Width = minRssiColumnWidth;
+            }
         }
     }
 }

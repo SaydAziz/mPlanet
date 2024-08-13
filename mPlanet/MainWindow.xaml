@@ -6,19 +6,118 @@
         xmlns:local="clr-namespace:mPlanet"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListView Name="scannedTagsListView" Margin="10,10,385,10">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding epc}" Width="300"/>
-                    <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding rssi}" Width="100"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Name="btnConnect" Content="Connect mHand" Click="btnConnect_Click" HorizontalAlignment="Left" Margin="440,65,0,0" VerticalAlignment="Top" Height="21" Width="120"/>
-        <Button Name="btnStartScan" Content="Fetch Scans" Click="btnFetchScan_Click"  HorizontalAlignment="Left" Margin="440,110,0,0" VerticalAlignment="Top" Height="66" Width="120"/>
-        <Button Name="btnExport" Content="Export" Click="btnExport_Click"  HorizontalAlignment="Left" Margin="440,201,0,0" VerticalAlignment="Top" Height="22" Width="120"/>
-        <Button Name="btnTestData" Content="Test Data" Click="btnTestData_Click"  HorizontalAlignment="Left" Margin="440,246,0,0" VerticalAlignment="Top" Height="22" Width="120"/>
-        <TextBox Name="txtConnectionPort" HorizontalAlignment="Left" Margin="440,29,0,0" TextWrapping="Wrap" Text="COM PORT HERE" VerticalAlignment="Top" Width="120"/>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#BDC3C7"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="Transparent" 
+                                BorderThickness="0" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#818c94"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#818c94"/>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Rectangle Grid.Row="0" Fill="#34495E"/>
+        <TextBlock Text="mPlanet RFID Помощник" Foreground="White" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" Margin="20,0,0,0"/>
+
+        <!-- Content -->
+        <Border Grid.Row="1" Background="White" Margin="20" CornerRadius="10">
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Panel -->
+                <Border Grid.Column="0" Background="#ECF0F1" CornerRadius="5">
+                    <ListView Name="scannedTagsListView" Margin="10" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="5,0,5,0"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                <Setter Property="Margin" Value="0,0,0,5"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GridViewColumnHeader">
+                                            <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                              VerticalAlignment="Center" 
+                                                              Margin="5,0,0,0"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn x:Name="epcColumn" Header="EPC" DisplayMemberBinding="{Binding epc}" Width="200"/>
+                                <GridViewColumn x:Name="rssiColumn" Header="RSSI" DisplayMemberBinding="{Binding rssi}" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+
+                <!-- Right Panel -->
+                <StackPanel Grid.Column="2">
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="COM-ПОРТ" FontSize="18"/>
+                        <TextBox Grid.Column="1" Name="txtConnectionPort" FontSize="18" Foreground="#34495E" Margin="0,5,0,5"/>
+                    </Grid>
+                    <Button Name="btnConnect" Content="Подключить сканер" Click="btnConnect_Click" Height="40" FontSize="18"  Foreground="#34495E" Margin="0,0,0,10"/>
+                    <Button Name="btnStartScan" Content="Получить сканы" Click="btnFetchScan_Click" Height="40" FontSize="18"  Foreground="#34495E" Margin="0,0,0,10"/>
+                    <Button Name="btnExport" Content="Экспорт" Click="btnExport_Click" Height="40" FontSize="18"  Foreground="#34495E" Margin="0,0,0,10"/>
+                    <Button Name="btnTestData" Content="Тестовые данные" Click="btnTestData_Click" Height="40" FontSize="18"  Foreground="#34495E"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
