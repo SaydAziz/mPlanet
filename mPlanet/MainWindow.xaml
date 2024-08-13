@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mPlanet"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="mPlanet RFID Помощник - Beta 1.1" Height="450" Width="800" Icon="pack://application:,,,/Icons/mPlanet Icon.ico">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#BDC3C7"/>
