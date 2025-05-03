@@ -81,6 +81,8 @@ namespace mPlanet
 
         private void btnFetchScan_Click(object sender, RoutedEventArgs e)
         {
+            scannedTags.Clear();
+
             mHandScanner.setProfile(30, 400, 99); //Placeholder values
             mHandScanner.setCurrentProfileH6();
 
