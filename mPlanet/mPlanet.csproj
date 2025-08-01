@@ -35,7 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>mPlanet Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Connector, Version=2.7.5.0, Culture=neutral, processorArchitecture=MSIL">
@@ -85,8 +86,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="TagInfo.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Configuration\AppSettings.cs" />
+    <Compile Include="Services\ExportJsonService.cs" />
+    <Compile Include="Services\Interfaces\IApiService.cs" />
+    <Compile Include="Services\Interfaces\IDataExportService.cs" />
+    <Compile Include="Services\Interfaces\IRfidScannerService.cs" />
+    <Compile Include="Infrastructure\RelayCommand.cs" />
+    <Compile Include="Infrastructure\ViewModelBase.cs" />
+    <Compile Include="Models\ScanSession.cs" />
+    <Compile Include="Models\TagInfo.cs" />
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -94,7 +103,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Services\ScannerMHandService.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -127,13 +138,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\mPlanet Icon.ico" />
+    <Resource Include="Assets\Icons\mPlanet Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MainIcon.ico" />
+    <Resource Include="Assets\Icons\MainIcon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="mPlanet Icon.ico" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
