@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using mPlanet.Infrastructure;
@@ -12,7 +10,7 @@ using mPlanet.Services.Interfaces;
 using mPlanet.Configuration;
 using System.IO;
 
-namespace mPlanet.ViewModels
+namespace mPlanet.ViewModels.Pages
 {
     public class MainPageViewModel : PageViewModelBase
     {

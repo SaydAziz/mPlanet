@@ -37,21 +37,18 @@
                         Style="{StaticResource NavigationButtonStyle}"
                         Margin="0,0,10,0"/>
                 
+                <Button Content="📋 Инвентаризация" 
+                        Command="{Binding NavigateToStockTakeCommand}"
+                        Style="{StaticResource NavigationButtonStyle}"
+                        Margin="0,0,10,0"/>
+
                 <Button Content="⚙️ Настройки" 
                         Command="{Binding NavigateToSettingsCommand}"
                         Style="{StaticResource NavigationButtonStyle}"
                         Margin="0,0,10,0"/>
-                
-                <Button Content="📊 Отчеты" 
-                        Command="{Binding NavigateToReportsCommand}"
-                        Style="{StaticResource NavigationButtonStyle}"
-                        Margin="0,0,10,0"/>
-                
-                <Button Content="❓ Справка" 
-                        Command="{Binding NavigateToHelpCommand}"
-                        Style="{StaticResource NavigationButtonStyle}"/>
 
                 <!-- Back/Forward buttons -->
+                <!--
                 <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Right" 
                             Margin="20,0,0,0">
@@ -67,6 +64,7 @@
                             Width="30"
                             ToolTip="Вперед"/>
                 </StackPanel>
+                -->
             </StackPanel>
         </Border>
 

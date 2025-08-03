@@ -4,16 +4,16 @@ using mPlanet.ViewModels.Pages;
 namespace mPlanet.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for SettingsPage.xaml
+    /// Interaction logic for StockTakePage.xaml
     /// </summary>
-    public partial class SettingsPage : Page
+    public partial class StockTakePage : Page
     {
-        public SettingsPage()
+        public StockTakePage()
         {
             InitializeComponent();
         }
 
-        public void SetViewModel(SettingsPageViewModel viewModel)
+        public void SetViewModel(StockTakePageViewModel viewModel)
         {
             DataContext = viewModel;
         }

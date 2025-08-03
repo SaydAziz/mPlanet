@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using mPlanet.ViewModels;
+using mPlanet.ViewModels.Pages;
 
 namespace mPlanet.Views.Pages
 {

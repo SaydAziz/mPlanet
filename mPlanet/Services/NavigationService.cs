@@ -1,6 +1,7 @@
 ﻿using mPlanet.Services.Interfaces;
 using mPlanet.Views.Pages;
 using mPlanet.ViewModels;
+using mPlanet.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -104,8 +105,11 @@ namespace mPlanet.Services
                     page = settingsPage;
                     break;
 
-                case "ReportsPage":
-                    // Add when you create this page
+                case "StockTakePage":
+                    var stockTakePage = new StockTakePage();
+                    var stockTakePageViewModel = new StockTakePageViewModel(this);
+                    stockTakePage.SetViewModel(stockTakePageViewModel);
+                    page = stockTakePage;
                     break;
 
                 case "HelpPage":

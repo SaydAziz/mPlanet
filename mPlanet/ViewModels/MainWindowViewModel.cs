@@ -38,7 +38,7 @@ namespace mPlanet.ViewModels
         // Navigation Commands
         public ICommand NavigateToMainCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
-        public ICommand NavigateToReportsCommand { get; }
+        public ICommand NavigateToStockTakeCommand { get; }
         public ICommand NavigateToHelpCommand { get; }
         public ICommand GoBackCommand { get; }
         public ICommand GoForwardCommand { get; }
@@ -57,7 +57,7 @@ namespace mPlanet.ViewModels
             // Initialize commands
             NavigateToMainCommand = new RelayCommand(_ => NavigateToPage("MainPage", "Главная"));
             NavigateToSettingsCommand = new RelayCommand(_ => NavigateToPage("SettingsPage", "Настройки"));
-            NavigateToReportsCommand = new RelayCommand(_ => NavigateToPage("ReportsPage", "Отчеты"));
+            NavigateToStockTakeCommand = new RelayCommand(_ => NavigateToPage("StockTakePage", "Инвентаризация"));
             NavigateToHelpCommand = new RelayCommand(_ => NavigateToPage("HelpPage", "Справка"));
             
             GoBackCommand = new RelayCommand(

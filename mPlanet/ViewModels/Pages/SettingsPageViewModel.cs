@@ -8,7 +8,7 @@ using mPlanet.Services.Interfaces;
 using mPlanet.Configuration;
 using System.Windows.Input;
 
-namespace mPlanet.ViewModels
+namespace mPlanet.ViewModels.Pages
 {
     public class SettingsPageViewModel : PageViewModelBase
     {
