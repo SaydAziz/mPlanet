@@ -21,5 +21,9 @@ namespace mPlanet.Services.Interfaces
         // Connection status broadcasting
         event EventHandler<(bool isConnected, string comPort)> ConnectionStatusChanged;
         void UpdateConnectionStatus(bool isConnected, string comPort = "");
+        
+        // Page cache management
+        void ClearPageCache();
+        void RemovePageFromCache(string pageName);
     }
 }

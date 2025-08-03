@@ -13,10 +13,12 @@ namespace mPlanet.Services
     {
         private MegawareMHand _scanner;
         private bool _isConnected;
+        private string _currentComPort = "";
 
         public event EventHandler<string> StatusChanged;
 
         public bool IsConnected => _isConnected;
+        public string CurrentComPort => _currentComPort;
 
         public ScannerMHandService()
         {
@@ -36,6 +38,7 @@ namespace mPlanet.Services
                 var result = await Task.Run(() => _scanner.connect(comPort));
 
                 _isConnected = result;
+                _currentComPort = result ? comPort : "";
 
                 if (_isConnected)
                 {
@@ -60,6 +63,7 @@ namespace mPlanet.Services
             catch (Exception ex)
             {
                 _isConnected = false;
+                _currentComPort = "";
                 OnStatusChanged($"Connection error: {ex.Message}");
                 return false;
             }
@@ -105,12 +109,14 @@ namespace mPlanet.Services
                 });
 
                 _isConnected = false;
+                _currentComPort = "";
                 OnStatusChanged("Disconnected from scanner");
             }
             catch (Exception ex)
             {
                 OnStatusChanged($"Disconnect error: {ex.Message}");
                 _isConnected = false;
+                _currentComPort = "";
             }
         }
 
@@ -151,7 +157,6 @@ namespace mPlanet.Services
         {
             StatusChanged?.Invoke(this, message);
         }
-
 
         public void Dispose()
         {

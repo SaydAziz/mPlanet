@@ -2,6 +2,7 @@
 using mPlanet.Views.Pages;
 using mPlanet.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -11,6 +12,9 @@ namespace mPlanet.Services
     {
         private Frame _frame;
         private string _currentPageName;
+        
+        // Cache for reusing pages
+        private readonly Dictionary<string, Page> _pageCache = new Dictionary<string, Page>();
 
         public bool CanGoBack => _frame?.CanGoBack ?? false;
         public bool CanGoForward => _frame?.CanGoForward ?? false;
@@ -44,33 +48,8 @@ namespace mPlanet.Services
 
             try
             {
-                Page page = null;
+                Page page = GetOrCreatePage(pageName);
                 _currentPageName = pageName;
-
-                // Create page instances with their ViewModels
-                switch (pageName)
-                {
-                    case "MainPage":
-                        var mainPage = new MainPage();
-                        var mainPageViewModel = new MainPageViewModel(this);
-                        mainPage.SetViewModel(mainPageViewModel);
-                        page = mainPage;
-                        break;
-
-                    case "SettingsPage":
-                        var settingsPage = new SettingsPage();
-                        var settingsPageViewModel = new SettingsPageViewModel(this);
-                        settingsPage.SetViewModel(settingsPageViewModel);
-                        page = settingsPage;
-                        break;
-
-                    default:
-                        // Fallback to URI navigation for unknown pages
-                        var uri = new Uri($"Views/Pages/{pageName}.xaml", UriKind.Relative);
-                        _frame.Navigate(uri);
-                        OnNavigationChanged($"Navigated to: {pageName}");
-                        return;
-                }
 
                 if (page != null)
                 {
@@ -84,11 +63,67 @@ namespace mPlanet.Services
                     
                     OnNavigationChanged($"Successfully navigated to: {pageName}");
                 }
+                else
+                {
+                    // Fallback to URI navigation for unknown pages
+                    var uri = new Uri($"Views/Pages/{pageName}.xaml", UriKind.Relative);
+                    _frame.Navigate(uri);
+                    OnNavigationChanged($"Navigated to: {pageName}");
+                }
             }
             catch (Exception ex)
             {
                 OnNavigationChanged($"Navigation error: {ex.Message}");
             }
+        }
+
+        private Page GetOrCreatePage(string pageName)
+        {
+            // Check if page already exists in cache
+            if (_pageCache.ContainsKey(pageName))
+            {
+                return _pageCache[pageName];
+            }
+
+            // Create new page and add to cache
+            Page page = null;
+            
+            switch (pageName)
+            {
+                case "MainPage":
+                    var mainPage = new MainPage();
+                    var mainPageViewModel = new MainPageViewModel(this);
+                    mainPage.SetViewModel(mainPageViewModel);
+                    page = mainPage;
+                    break;
+
+                case "SettingsPage":
+                    var settingsPage = new SettingsPage();
+                    var settingsPageViewModel = new SettingsPageViewModel(this);
+                    settingsPage.SetViewModel(settingsPageViewModel);
+                    page = settingsPage;
+                    break;
+
+                case "ReportsPage":
+                    // Add when you create this page
+                    break;
+
+                case "HelpPage":
+                    // Add when you create this page
+                    break;
+
+                default:
+                    // For unknown pages, return null and let the caller handle it
+                    // or you could throw an exception for unsupported pages
+                    return null;
+            }
+
+            if (page != null)
+            {
+                _pageCache[pageName] = page;
+            }
+
+            return page;
         }
 
         public void NavigateTo(Type pageType)
@@ -97,6 +132,8 @@ namespace mPlanet.Services
 
             try
             {
+                // For type-based navigation, we'll still create new instances
+                // as we don't have a string key to cache by
                 var page = Activator.CreateInstance(pageType);
                 _frame.Navigate(page);
                 OnNavigationChanged($"Navigated to: {pageType.Name}");
@@ -122,6 +159,33 @@ namespace mPlanet.Services
             {
                 _frame.GoForward();
                 OnNavigationChanged("Navigated forward");
+            }
+        }
+
+        public void ClearPageCache()
+        {
+            // Call OnNavigatedFrom for all cached pages before clearing
+            foreach (var cachedPage in _pageCache.Values)
+            {
+                if (cachedPage.DataContext is PageViewModelBase viewModel)
+                {
+                    viewModel.OnNavigatedFrom();
+                }
+            }
+            
+            _pageCache.Clear();
+        }
+
+        public void RemovePageFromCache(string pageName)
+        {
+            if (_pageCache.ContainsKey(pageName))
+            {
+                var page = _pageCache[pageName];
+                if (page.DataContext is PageViewModelBase viewModel)
+                {
+                    viewModel.OnNavigatedFrom();
+                }
+                _pageCache.Remove(pageName);
             }
         }
 

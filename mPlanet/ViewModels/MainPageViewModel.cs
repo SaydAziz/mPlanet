@@ -308,9 +308,10 @@ namespace mPlanet.ViewModels
 
         public override void OnNavigatedTo()
         {
-            // Called when user navigates to this page
+            // Called when user navigates to this page (either first time or returning)
             _navigationService.UpdateStatusMessage("Страница сканирования загружена");
-            // Update connection status when navigating to this page
+            
+            // Update connection status display
             _navigationService.UpdateConnectionStatus(IsConnected, IsConnected ? ComPort : "");
         }
 
