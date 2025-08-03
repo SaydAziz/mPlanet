@@ -12,10 +12,9 @@ using mPlanet.Services.Interfaces;
 using mPlanet.Configuration;
 using System.IO;
 
-
 namespace mPlanet.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainPageViewModel : PageViewModelBase
     {
         private readonly IRfidScannerService _scannerService;
         private readonly IDataExportService _dataExportService;
@@ -60,6 +59,8 @@ namespace mPlanet.ViewModels
                 if (SetProperty(ref _isConnected, value))
                 {
                     OnConnectionStateChanged();
+                    // Update the main window connection status
+                    _navigationService.UpdateConnectionStatus(value, value ? ComPort : "");
                 }
             }
         }
@@ -95,16 +96,14 @@ namespace mPlanet.ViewModels
             {
                 if (SetProperty(ref _canConnect, value))
                 {
-                    // ADDED: Update connect command when CanConnect changes
                     ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
                 }
             }
         }
 
-
         public ObservableCollection<TagInfo> ScannedTags { get; }
 
-        public MainViewModel()
+        public MainPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             _scannerService = new ScannerMHandService();
             _dataExportService = new ExportJsonService();
@@ -145,21 +144,25 @@ namespace mPlanet.ViewModels
             {
                 if (string.IsNullOrWhiteSpace(ComPort))
                 {
-                    StatusMessage = "Please enter a COM port.";
+                    _navigationService.UpdateStatusMessage("Пожалуйста, введите COM порт.");
                     return;
                 }
 
                 CanConnect = false;
-                StatusMessage = "Connecting...";
+                _navigationService.UpdateStatusMessage("Подключение...");
 
                 bool connected = await _scannerService.ConnectAsync(ComPort);
                 IsConnected = connected;
 
-                StatusMessage = connected ? $"Connected to COM port {ComPort}" : $"Failed to connect to COM port {ComPort}";
+                var message = connected ? 
+                    $"Подключен к COM порту {ComPort}" : 
+                    $"Не удалось подключиться к COM порту {ComPort}";
+                
+                _navigationService.UpdateStatusMessage(message);
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Connection error: {ex.Message}";
+                _navigationService.UpdateStatusMessage($"Ошибка подключения: {ex.Message}");
                 IsConnected = false;
             }
             finally
@@ -178,7 +181,7 @@ namespace mPlanet.ViewModels
             try
             {
                 IsGrabbingScan = true;
-                StatusMessage = "Grabbing scanned tags...";
+                _navigationService.UpdateStatusMessage("Сканирование меток...");
 
                 ScannedTags.Clear();
 
@@ -192,11 +195,11 @@ namespace mPlanet.ViewModels
                     }
                 }
 
-                StatusMessage = $"Tags grabbed from scan. Found {newTags.Count()} tags.";
+                _navigationService.UpdateStatusMessage($"Сканирование завершено. Найдено {newTags.Count()} меток.");
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Scan error: {ex.Message}";
+                _navigationService.UpdateStatusMessage($"Ошибка сканирования: {ex.Message}");
             }
             finally
             {
@@ -215,23 +218,27 @@ namespace mPlanet.ViewModels
             {
                 if (!ScannedTags.Any())
                 {
-                    StatusMessage = "No tags to export.";
+                    _navigationService.UpdateStatusMessage("Нет меток для экспорта.");
                     return;
                 }
 
                 IsExporting = true;
-                StatusMessage = "Exporting data...";
+                _navigationService.UpdateStatusMessage("Экспорт данных...");
 
                 string fileName = $"RFID_Scan_{DateTime.Now:ddMMyyyyHHmmss}.json";
                 string filePath = Path.Combine(AppSettings.DefaultExportPath, fileName);
 
                 bool success = await _dataExportService.ExportAsync(ScannedTags, filePath, "json");
 
-                StatusMessage = success ? $"Exported to: {filePath}" : "Export failed.";
+                var message = success ? 
+                    $"Экспорт завершен: {filePath}" : 
+                    "Ошибка экспорта.";
+                    
+                _navigationService.UpdateStatusMessage(message);
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Export error: {ex.Message}";
+                _navigationService.UpdateStatusMessage($"Ошибка экспорта: {ex.Message}");
             }
             finally
             {
@@ -243,7 +250,6 @@ namespace mPlanet.ViewModels
         {
             return ScannedTags.Any() && !IsExporting;
         }
-
 
         private void ExecuteAddTestData()
         {
@@ -269,27 +275,28 @@ namespace mPlanet.ViewModels
                 }
             }
 
-            StatusMessage = $"Added {fakeData.Length} test tags.";
+            _navigationService.UpdateStatusMessage($"Добавлено {fakeData.Length} тестовых меток.");
         }
 
         private async Task ExecuteDisconnectAsync()
         {
             try
             {
-                StatusMessage = "Disconnecting...";
+                _navigationService.UpdateStatusMessage("Отключение...");
                 await _scannerService.DisconnectAsync();
                 IsConnected = false;
-                StatusMessage = "Disconnected.";
+                _navigationService.UpdateStatusMessage("Отключен.");
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Disconnect error: {ex.Message}";
+                _navigationService.UpdateStatusMessage($"Ошибка отключения: {ex.Message}");
             }
         }
 
         private void OnScannerStatusChanged(object sender, string message)
         {
-            StatusMessage = message;
+            // Forward scanner status messages to the main window status bar
+            _navigationService.UpdateStatusMessage(message);
         }
 
         private void OnConnectionStateChanged()
@@ -297,6 +304,23 @@ namespace mPlanet.ViewModels
             ((RelayCommand)GrabScanCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DisconnectCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
+        }
+
+        public override void OnNavigatedTo()
+        {
+            // Called when user navigates to this page
+            _navigationService.UpdateStatusMessage("Страница сканирования загружена");
+            // Update connection status when navigating to this page
+            _navigationService.UpdateConnectionStatus(IsConnected, IsConnected ? ComPort : "");
+        }
+
+        public override void OnNavigatedFrom()
+        {
+            // Called when user navigates away from this page
+            if (IsGrabbingScan)
+            {
+                _navigationService.UpdateStatusMessage("Сканирование приостановлено");
+            }
         }
 
         public async Task CleanupAsync()
@@ -310,7 +334,7 @@ namespace mPlanet.ViewModels
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Cleanup error: {ex.Message}";
+                _navigationService.UpdateStatusMessage($"Ошибка очистки: {ex.Message}");
             }
         }
     }

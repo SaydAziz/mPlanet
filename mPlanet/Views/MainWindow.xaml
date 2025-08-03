@@ -1,89 +1,25 @@
 ﻿<Window x:Class="mPlanet.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:mPlanet"
-        mc:Ignorable="d"
         Title="mPlanet RFID Помощник - Beta 1.1" 
         Height="500" 
-        Width="800" 
+        Width="900" 
         Icon="/Assets/Icons/MainIcon.ico"
         Closing="Window_Closing">
-    
-    <!-- Window Resources: Styling for consistent UI appearance -->
-    <Window.Resources>
-        <!-- Custom Button Style with rounded corners and hover effects -->
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="#BDC3C7"/>
-            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="Transparent" 
-                                BorderThickness="0" 
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <!-- Button interaction triggers -->
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#818c94"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#818c94"/>
-                    <Setter Property="RenderTransform">
-                        <Setter.Value>
-                            <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-                <!-- Disabled button appearance -->
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="#95A5A6"/>
-                    <Setter Property="Foreground" Value="#7F8C8D"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
 
-        <!-- Custom TextBox Style -->
-        <Style TargetType="TextBox">
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="BorderBrush" Value="#BDC3C7"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Foreground" Value="#34495E"/>
-        </Style>
-
-        <!-- Custom Label Style -->
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Foreground" Value="#34495E"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-    </Window.Resources>
-
-    <!-- Main Layout Grid -->
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
-            <!-- Header row with fixed height -->
+            <!-- Header -->
             <RowDefinition Height="60"/>
-            <!-- Content row that takes remaining space -->
+            <!-- Navigation Menu -->
+            <RowDefinition Height="50"/>
+            <!-- Content -->
             <RowDefinition Height="*"/>
-            <!-- Status bar row with auto height -->
+            <!-- Status Bar -->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Application Header Section -->
+        <!-- Application Header -->
         <Rectangle Grid.Row="0" Fill="#34495E"/>
         <TextBlock Text="mPlanet RFID Помощник" 
                    Foreground="White" 
@@ -92,256 +28,111 @@
                    VerticalAlignment="Center" 
                    Margin="20,0,0,0"/>
 
-        <!-- Main Content Area -->
-        <Border Grid.Row="1" 
-                Background="White" 
-                Margin="20" 
-                CornerRadius="10">
-            <Grid Margin="20">
-                <Grid.ColumnDefinitions>
-                    <!-- Left panel for tag display -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- Spacing column -->
-                    <ColumnDefinition Width="20"/>
-                    <!-- Right panel for controls -->
-                    <ColumnDefinition Width="300"/>
-                </Grid.ColumnDefinitions>
+        <!-- Navigation Menu -->
+        <Border Grid.Row="1" Background="#2C3E50">
+            <StackPanel Orientation="Horizontal" Margin="20,0">
+                <!-- Navigation Buttons -->
+                <Button Content="🏠 Главная" 
+                        Command="{Binding NavigateToMainCommand}"
+                        Style="{StaticResource NavigationButtonStyle}"
+                        Margin="0,0,10,0"/>
+                
+                <Button Content="⚙️ Настройки" 
+                        Command="{Binding NavigateToSettingsCommand}"
+                        Style="{StaticResource NavigationButtonStyle}"
+                        Margin="0,0,10,0"/>
+                
+                <Button Content="📊 Отчеты" 
+                        Command="{Binding NavigateToReportsCommand}"
+                        Style="{StaticResource NavigationButtonStyle}"
+                        Margin="0,0,10,0"/>
+                
+                <Button Content="❓ Справка" 
+                        Command="{Binding NavigateToHelpCommand}"
+                        Style="{StaticResource NavigationButtonStyle}"/>
 
-                <!-- Left Panel: Scanned Tags Display -->
-                <Border Grid.Column="0" 
-                        Background="#ECF0F1" 
-                        CornerRadius="5">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <!-- Header for tags section -->
-                            <RowDefinition Height="Auto"/>
-                            <!-- Tags list -->
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <!-- Tags Section Header -->
-                        <TextBlock Grid.Row="0"
-                                   Text="Сканированные метки"
-                                   FontSize="16"
-                                   FontWeight="Bold"
-                                   Foreground="#34495E"
-                                   Margin="15,10,15,5"/>
-
-                        <!-- Scanned Tags ListView -->
-                        <!-- Bound to ScannedTags collection in ViewModel -->
-                        <ListView Grid.Row="1"
-                                  Name="scannedTagsListView" 
-                                  ItemsSource="{Binding ScannedTags}"
-                                  Margin="10,5,10,10" 
-                                  Background="Transparent" 
-                                  BorderThickness="0" 
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                  SizeChanged="ListView_SizeChanged">
-                            
-                            <!-- ListView Item Styling -->
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                    <Setter Property="Padding" Value="5,2,5,2"/>
-                                    <Setter Property="Margin" Value="0"/>
-                                    <Setter Property="BorderBrush" Value="Transparent"/>
-                                    <!-- Alternating row colors for better readability -->
-                                    <Style.Triggers>
-                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                            <Setter Property="Background" Value="#F8F9FA"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ListView.ItemContainerStyle>
-
-                            <!-- Column Header Styling -->
-                            <ListView.Resources>
-                                <Style TargetType="GridViewColumnHeader">
-                                    <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="BorderBrush" Value="Transparent"/>
-                                    <Setter Property="Foreground" Value="#2C3E50"/>
-                                    <Setter Property="FontSize" Value="14"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                                    <Setter Property="Margin" Value="0,0,0,5"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="GridViewColumnHeader">
-                                                <Border Background="Transparent" 
-                                                        BorderBrush="Transparent" 
-                                                        BorderThickness="0">
-                                                    <ContentPresenter 
-                                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                                        VerticalAlignment="Center" 
-                                                        Margin="5,5,0,5"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ListView.Resources>
-
-                            <!-- Grid View Columns for Tag Data -->
-                            <ListView.View>
-                                <GridView AllowsColumnReorder="False">
-                                    <!-- EPC Column: Electronic Product Code (main identifier) -->
-                                    <GridViewColumn x:Name="epcColumn" 
-                                                    Header="EPC" 
-                                                    DisplayMemberBinding="{Binding EPC}" 
-                                                    Width="200"/>
-                                    
-                                    <!-- RSSI Column: Signal strength indicator -->
-                                    <GridViewColumn x:Name="rssiColumn" 
-                                                    Header="RSSI" 
-                                                    DisplayMemberBinding="{Binding RSSI}" 
-                                                    Width="80"/>
-                                    
-                                    <!-- Scan Time Column: When the tag was detected -->
-                                    <GridViewColumn Header="Время" 
-                                                    DisplayMemberBinding="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
-                                                    Width="70"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Grid>
-                </Border>
-
-                <!-- Right Panel: Control Buttons and Settings -->
-                <StackPanel Grid.Column="2">
-                    
-                    <!-- Connection Settings Section -->
-                    <GroupBox Header="Подключение" 
-                              Margin="0,0,0,15"
-                              Padding="10">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- COM Port Input -->
-                            <Grid Grid.Row="0" Margin="0,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <Label Grid.Column="0" 
-                                       Content="COM-ПОРТ:" 
-                                       Width="90"/>
-                                
-                                <!-- Bound to ComPort property in ViewModel -->
-                                <!-- UpdateSourceTrigger=PropertyChanged ensures immediate updates -->
-                                <TextBox Grid.Column="1" 
-                                         Name="txtConnectionPort" 
-                                         Text="{Binding ComPort, UpdateSourceTrigger=PropertyChanged}"
-                                         Margin="5,0,0,0"
-                                         ToolTip="Введите номер COM-порта (например: COM1)"/>
-                            </Grid>
-
-                            <!-- Connection Buttons -->
-                            <!-- Connect Button: Bound to ConnectCommand -->
-                            <!-- Command automatically handles enable/disable based on CanExecute -->
-                            <Button Grid.Row="1"
-                                    Content="Подключить сканер" 
-                                    Command="{Binding ConnectCommand}"
-                                    Height="35" 
-                                    Margin="0,0,0,5"
-                                    ToolTip="Подключиться к RFID сканеру"/>
-
-                            <!-- Disconnect Button: Bound to DisconnectCommand -->
-                            <Button Grid.Row="2"
-                                    Content="Отключить" 
-                                    Command="{Binding DisconnectCommand}"
-                                    Height="35"
-                                    ToolTip="Отключиться от сканера"/>
-                        </Grid>
-                    </GroupBox>
-
-                    <!-- Scanning Operations Section -->
-                    <GroupBox Header="Сканирование" 
-                              Margin="0,0,0,15"
-                              Padding="10">
-                        <StackPanel>
-                            <!-- Scan Tags Button: Bound to ScanCommand -->
-                            <Button Content="Получить сканы" 
-                                    Command="{Binding GrabScanCommand}"
-                                    Height="40" 
-                                    Margin="0,0,0,10"
-                                    ToolTip="Начать сканирование RFID меток"/>
-
-                            <!-- Add Test Data Button: For development/testing -->
-                            <Button Content="Тестовые данные" 
-                                    Command="{Binding AddTestDataCommand}"
-                                    Height="35"
-                                    ToolTip="Добавить тестовые данные для проверки"/>
-                        </StackPanel>
-                    </GroupBox>
-
-                    <!-- Data Export Section -->
-                    <GroupBox Header="Экспорт данных" 
-                              Padding="10">
-                        <!-- Export Button: Bound to ExportCommand -->
-                        <!-- Will be automatically disabled when no tags are available -->
-                        <Button Content="Экспорт в JSON" 
-                                Command="{Binding ExportCommand}"
-                                Height="40"
-                                ToolTip="Экспортировать сканированные метки в JSON файл"/>
-                    </GroupBox>
-
+                <!-- Back/Forward buttons -->
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            Margin="20,0,0,0">
+                    <Button Content="◀" 
+                            Command="{Binding GoBackCommand}"
+                            Style="{StaticResource NavigationButtonStyle}"
+                            Width="30"
+                            Margin="0,0,5,0"
+                            ToolTip="Назад"/>
+                    <Button Content="▶" 
+                            Command="{Binding GoForwardCommand}"
+                            Style="{StaticResource NavigationButtonStyle}"
+                            Width="30"
+                            ToolTip="Вперед"/>
                 </StackPanel>
-            </Grid>
+            </StackPanel>
         </Border>
 
-        <!-- Status Bar Section -->
-        <StatusBar Grid.Row="2" 
+        <!-- Content Frame -->
+        <Border Grid.Row="2" 
+                Background="White" 
+                Margin="20,10,20,10" 
+                CornerRadius="10">
+            <Frame x:Name="MainFrame"
+                   NavigationUIVisibility="Hidden"
+                   Margin="20"/>
+        </Border>
+
+        <!-- Status Bar with Connection Status -->
+        <StatusBar Grid.Row="3" 
                    Background="#ECF0F1" 
                    BorderBrush="#BDC3C7" 
                    BorderThickness="0,1,0,0">
-            
-            <!-- Main Status Message -->
-            <!-- Bound to StatusMessage property in ViewModel -->
             <StatusBarItem>
                 <TextBlock Text="{Binding StatusMessage}" 
                            Foreground="#34495E"
                            FontSize="12"/>
             </StatusBarItem>
-
-            <!-- Connection and Tag Count Info -->
             <StatusBarItem HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
                     <!-- Connection Status Indicator -->
-                    <TextBlock FontSize="12">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Text" Value="Отключен"/>
-                                <Setter Property="Foreground" Value="#E74C3C"/>
+                    <Ellipse Width="10" Height="10" 
+                             Margin="0,0,5,0"
+                             VerticalAlignment="Center">
+                        <Ellipse.Style>
+                            <Style TargetType="Ellipse">
+                                <Setter Property="Fill" Value="#E74C3C"/> <!-- Red for disconnected -->
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsConnected}" Value="True">
-                                        <Setter Property="Text" Value="Подключен"/>
-                                        <Setter Property="Foreground" Value="#27AE60"/>
+                                        <Setter Property="Fill" Value="#27AE60"/> <!-- Green for connected -->
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    
-                    <TextBlock Text=" | " 
-                               Foreground="#34495E" 
-                               FontSize="12" 
-                               Margin="5,0"/>
-                    
-                    <!-- Tag Count Display -->
-                    <TextBlock Foreground="#34495E" FontSize="12">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="Меток: {0}">
-                                <Binding Path="ScannedTags.Count"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
+                        </Ellipse.Style>
+                    </Ellipse>
+                    <TextBlock Text="{Binding ConnectionStatus}" 
+                               Foreground="#34495E"
+                               FontSize="12"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>
     </Grid>
+
+    <!-- Window Resources for Navigation Button Style -->
+    <Window.Resources>
+        <Style x:Key="NavigationButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="40"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#34495E"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#1ABC9C"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 </Window>

@@ -1,54 +1,37 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Windows;
-using System.Net;
-using MegawareDLL;
-using Newtonsoft.Json;
-using System.Text;
-using mPlanet.Models;
+﻿using System.Windows;
+using mPlanet.Services;
 using mPlanet.ViewModels;
 
 namespace mPlanet.Views
 {
     public partial class MainWindow : Window
     {
-        private MainViewModel _viewModel;
+        private NavigationService _navigationService;
+        private MainWindowViewModel _mainViewModel;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            _viewModel = new MainViewModel();
-            DataContext = _viewModel;
-
+            InitializeNavigation();
         }
 
-        private void ListView_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void InitializeNavigation()
         {
-            double minEpcColumnWidth = 200;
-            double minRssiColumnWidth = 120;
-            double remainingWidth = scannedTagsListView.ActualWidth - SystemParameters.VerticalScrollBarWidth;
+            // Initialize navigation service
+            _navigationService = new NavigationService();
+            _navigationService.Initialize(MainFrame);
 
-            if (remainingWidth > (minEpcColumnWidth + minRssiColumnWidth))
-            {
-                double newWidth = remainingWidth / 2;
-                epcColumn.Width = newWidth > minEpcColumnWidth ? newWidth : minEpcColumnWidth;
-                rssiColumn.Width = newWidth > minRssiColumnWidth ? newWidth : minRssiColumnWidth;
-            }
-            else
-            {
-                epcColumn.Width = minEpcColumnWidth;
-                rssiColumn.Width = minRssiColumnWidth;
-            }
+            // Create main window ViewModel
+            _mainViewModel = new MainWindowViewModel(_navigationService);
+            DataContext = _mainViewModel;
+
+            // Navigate to initial page
+            _navigationService.NavigateTo("MainPage");
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_viewModel != null)
-            {
-                await _viewModel.CleanupAsync();
-            }
+            // Cleanup when closing
         }
     }
 }

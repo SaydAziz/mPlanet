@@ -12,6 +12,10 @@ namespace mPlanet.Configuration
     {
         public const int DefaultApiPort = 8080;
         public const string DefaultExportPath = ".\\exports";
+        public const bool AutoOpenExportFolder = false;
+        public const bool StartWithWindows = false;
+        public const bool MinimizeToTray = false;
+        public const string DefaultLanguage = "Русский";
 
         public static class Scanner
         {
