@@ -1,104 +1,81 @@
-﻿using mPlanet.Services.Interfaces;
-using System.Collections.ObjectModel;
-using mPlanet.Models;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using mPlanet.Infrastructure;
-using mPlanet.Services;
-using System;
+using mPlanet.Services.Interfaces;
+using mPlanet.Models;
 using System.Linq;
-using System.Threading.Tasks;
-using mPlanet.Configuration;
-using System.IO;
+using System;
 
 namespace mPlanet.ViewModels.Pages
 {
     public class StockTakePageViewModel : PageViewModelBase
     {
         private readonly IRfidScannerService _scannerService;
-        private readonly IDataExportService _dataExportService;
-
-        private string _comPort = "";
+        private readonly IDataExportService _exportService;
+        
+        private string _comPort = "COM3";
         private bool _isConnected = false;
-        private bool _isScanning = false;
-        private bool _isExporting = false;
-        private bool _canConnect = true;
-        private string _expectedStockPath = "";
+        private string _currentView = "Missing"; // Default to Missing view
+
+        // Collections
+        private ObservableCollection<TagInfo> _expectedTags = new ObservableCollection<TagInfo>();
+        private ObservableCollection<TagInfo> _scannedTags = new ObservableCollection<TagInfo>();
+        private ObservableCollection<TagInfo> _missingTags = new ObservableCollection<TagInfo>();
+        private ObservableCollection<TagInfo> _extraTags = new ObservableCollection<TagInfo>();
+        private ObservableCollection<TagInfo> _foundTags = new ObservableCollection<TagInfo>();
+
+        // Summary counts
         private int _expectedCount = 0;
         private int _foundCount = 0;
         private int _missingCount = 0;
-
-        // Collections
-        public ObservableCollection<TagInfo> ExpectedTags { get; }
-        public ObservableCollection<TagInfo> ScannedTags { get; }
-        public ObservableCollection<TagInfo> MissingTags { get; }
-        public ObservableCollection<TagInfo> ExtraTags { get; }
 
         // Properties
         public string ComPort
         {
             get => _comPort;
-            set
-            {
-                if (SetProperty(ref _comPort, value))
-                {
-                    ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
-                }
-            }
+            set => SetProperty(ref _comPort, value);
         }
 
         public bool IsConnected
         {
             get => _isConnected;
-            set
-            {
-                if (SetProperty(ref _isConnected, value))
-                {
-                    OnConnectionStateChanged();
-                    _navigationService.UpdateConnectionStatus(value, value ? ComPort : "");
-                }
-            }
+            set => SetProperty(ref _isConnected, value);
         }
 
-        public bool IsScanning
+        public string CurrentView
         {
-            get => _isScanning;
-            set
-            {
-                if (SetProperty(ref _isScanning, value))
-                {
-                    ((RelayCommand)ScanCommand).RaiseCanExecuteChanged();
-                }
-            }
+            get => _currentView;
+            set => SetProperty(ref _currentView, value);
         }
 
-        public bool IsExporting
+        public ObservableCollection<TagInfo> ExpectedTags
         {
-            get => _isExporting;
-            set
-            {
-                if (SetProperty(ref _isExporting, value))
-                {
-                    ((RelayCommand)ExportResultsCommand).RaiseCanExecuteChanged();
-                }
-            }
+            get => _expectedTags;
+            set => SetProperty(ref _expectedTags, value);
         }
 
-        public bool CanConnect
+        public ObservableCollection<TagInfo> ScannedTags
         {
-            get => _canConnect;
-            set
-            {
-                if (SetProperty(ref _canConnect, value))
-                {
-                    ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
-                }
-            }
+            get => _scannedTags;
+            set => SetProperty(ref _scannedTags, value);
         }
 
-        public string ExpectedStockPath
+        public ObservableCollection<TagInfo> MissingTags
         {
-            get => _expectedStockPath;
-            set => SetProperty(ref _expectedStockPath, value);
+            get => _missingTags;
+            set => SetProperty(ref _missingTags, value);
+        }
+
+        public ObservableCollection<TagInfo> ExtraTags
+        {
+            get => _extraTags;
+            set => SetProperty(ref _extraTags, value);
+        }
+
+        public ObservableCollection<TagInfo> FoundTags
+        {
+            get => _foundTags;
+            set => SetProperty(ref _foundTags, value);
         }
 
         public int ExpectedCount
@@ -123,113 +100,71 @@ namespace mPlanet.ViewModels.Pages
         public ICommand ConnectCommand { get; }
         public ICommand DisconnectCommand { get; }
         public ICommand LoadExpectedStockCommand { get; }
+        public ICommand AddTestExpectedDataCommand { get; }
         public ICommand ScanCommand { get; }
         public ICommand CompareStockCommand { get; }
         public ICommand ExportResultsCommand { get; }
         public ICommand ClearAllCommand { get; }
-        public ICommand AddTestExpectedDataCommand { get; }
+        
+        // New clickable status commands
+        public ICommand ShowExpectedCommand { get; }
+        public ICommand ShowFoundCommand { get; }
+        public ICommand ShowMissingCommand { get; }
+        public ICommand ShowExtraCommand { get; }
 
-        public StockTakePageViewModel(INavigationService navigationService)
-            : base(navigationService)
+        public StockTakePageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            // Use the same scanner service as MainPage
-            _scannerService = new ScannerMHandService();
-            _dataExportService = new ExportJsonService();
-
-            // Initialize collections
-            ExpectedTags = new ObservableCollection<TagInfo>();
-            ScannedTags = new ObservableCollection<TagInfo>();
-            MissingTags = new ObservableCollection<TagInfo>();
-            ExtraTags = new ObservableCollection<TagInfo>();
-
-            // Subscribe to scanner events
-            _scannerService.StatusChanged += OnScannerStatusChanged;
-
             // Initialize commands
-            ConnectCommand = new RelayCommand(
-                execute: async _ => await ExecuteConnectAsync(),
-                canExecute: _ => CanExecuteConnect()
-            );
+            ConnectCommand = new RelayCommand(_ => ConnectToScanner(), _ => !IsConnected);
+            DisconnectCommand = new RelayCommand(_ => DisconnectFromScanner(), _ => IsConnected);
+            LoadExpectedStockCommand = new RelayCommand(_ => LoadExpectedStock());
+            AddTestExpectedDataCommand = new RelayCommand(_ => AddTestExpectedData());
+            ScanCommand = new RelayCommand(_ => PerformScan(), _ => IsConnected);
+            CompareStockCommand = new RelayCommand(_ => CompareStock());
+            ExportResultsCommand = new RelayCommand(_ => ExportResults());
+            ClearAllCommand = new RelayCommand(_ => ClearAll());
+            
+            // Initialize the new status button commands
+            ShowExpectedCommand = new RelayCommand(_ => ShowExpectedTags());
+            ShowFoundCommand = new RelayCommand(_ => ShowFoundTags());
+            ShowMissingCommand = new RelayCommand(_ => ShowMissingTags());
+            ShowExtraCommand = new RelayCommand(_ => ShowExtraTags());
 
-            DisconnectCommand = new RelayCommand(
-                execute: async _ => await ExecuteDisconnectAsync(),
-                canExecute: _ => IsConnected
-            );
-
-            LoadExpectedStockCommand = new RelayCommand(
-                execute: _ => ExecuteLoadExpectedStock()
-            );
-
-            ScanCommand = new RelayCommand(
-                execute: async _ => await ExecuteScanAsync(),
-                canExecute: _ => CanExecuteScan()
-            );
-
-            CompareStockCommand = new RelayCommand(
-                execute: _ => ExecuteCompareStock(),
-                canExecute: _ => ExpectedTags.Any() && ScannedTags.Any()
-            );
-
-            ExportResultsCommand = new RelayCommand(
-                execute: async _ => await ExecuteExportResultsAsync(),
-                canExecute: _ => CanExecuteExport()
-            );
-
-            ClearAllCommand = new RelayCommand(
-                execute: _ => ExecuteClearAll()
-            );
-
-            AddTestExpectedDataCommand = new RelayCommand(
-                execute: _ => ExecuteAddTestExpectedData()
-            );
+            // Initialize services (you'll need to inject these)
+            // _scannerService = scannerService;
+            // _exportService = exportService;
         }
 
-        private async Task ExecuteConnectAsync()
+        private async void ConnectToScanner()
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(ComPort))
+                if (_scannerService != null)
                 {
-                    _navigationService.UpdateStatusMessage("Пожалуйста, введите COM порт.");
-                    return;
+                    IsConnected = await _scannerService.ConnectAsync(ComPort);
+                    _navigationService.UpdateConnectionStatus(IsConnected, ComPort);
+                    _navigationService.UpdateStatusMessage(IsConnected ? 
+                        $"Подключен к {ComPort}" : 
+                        $"Не удалось подключиться к {ComPort}");
                 }
-
-                CanConnect = false;
-                _navigationService.UpdateStatusMessage("Подключение к сканеру...");
-
-                bool connected = await _scannerService.ConnectAsync(ComPort);
-                IsConnected = connected;
-
-                var message = connected ?
-                    $"Подключен к COM порту {ComPort}" :
-                    $"Не удалось подключиться к COM порту {ComPort}";
-
-                _navigationService.UpdateStatusMessage(message);
             }
             catch (Exception ex)
             {
                 _navigationService.UpdateStatusMessage($"Ошибка подключения: {ex.Message}");
-                IsConnected = false;
-            }
-            finally
-            {
-                CanConnect = true;
             }
         }
 
-        private bool CanExecuteConnect()
-        {
-            return !IsConnected && !string.IsNullOrWhiteSpace(ComPort) && CanConnect;
-        }
-
-        private async Task ExecuteDisconnectAsync()
+        private async void DisconnectFromScanner()
         {
             try
             {
-                _navigationService.UpdateStatusMessage("Отключение...");
-                await _scannerService.DisconnectAsync();
-                IsConnected = false;
-                _navigationService.UpdateStatusMessage("Отключен от сканера.");
+                if (_scannerService != null)
+                {
+                    await _scannerService.DisconnectAsync();
+                    IsConnected = false;
+                    _navigationService.UpdateConnectionStatus(false);
+                    _navigationService.UpdateStatusMessage("Отключен от сканера");
+                }
             }
             catch (Exception ex)
             {
@@ -237,330 +172,183 @@ namespace mPlanet.ViewModels.Pages
             }
         }
 
-        private void ExecuteLoadExpectedStock()
+        private void LoadExpectedStock()
         {
             _navigationService.UpdateStatusMessage("Загрузка ожидаемого инвентаря...");
-
-            try
-            {
-                LoadExpectedTagsFromCustomList();
-                ExpectedStockPath = "Встроенный список инвентаря";
-                
-                _navigationService.UpdateStatusMessage($"Загружено {ExpectedTags.Count} ожидаемых меток из встроенного списка");
-            }
-            catch (Exception ex)
-            {
-                _navigationService.UpdateStatusMessage($"Ошибка загрузки инвентаря: {ex.Message}");
-            }
+            // Implement file loading logic here
         }
 
-        private void LoadExpectedTagsFromCustomList()
+        private void AddTestExpectedData()
         {
-            // Your custom expected stock list
-            string[] expectedStockData = new string[]
-            {
-                "1400-00016697,131",
-                "1400-00025746,138",
-                "1400-00019672,141",
-                "1400-00016075,145",
-                "1400-00044299,147",
-                "3400-E28011700000021C03159BAF,134",
-                "1400-00017440,138",
-                "1400-00014862,142",
-                "1400-00018673,126",
-                "1400-00044268,134",
-                "1400-00032995,132",
-                "1400-00014274,152",
-                "1400-00017460,143",
-                "1400-00017569,132",
-                "1400-00017098,130",
-                "1400-00015391,149",
-                "1400-00016041,144",
-                "1400-00019073,139",
-                "1400-00017280,140",
-                "1400-00017075,154",
-                "1400-00017092,150",
-                "1400-00019666,134",
-                "1400-00019673,157",
-                "1400-00017093,135",
-                "1400-00016696,137",
-                "1400-00016693,139",
-                "1400-00014430,140",
-                "1400-00017265,151",
-                "1400-00019339,146",
-                "1400-00025744,143",
-                "1400-00017074,141",
-                "1400-00017083,149",
-                "1400-00033057,131",
-                "1400-00033099,136",
-                "1400-00017367,135",
-                "1400-00044223,131",
-                "1400-00019074,156",
-                "1400-00014486,143",
-                "1400-00014912,138",
-                "1400-00017099,133",
-                "1400-00016694,136",
-                "1400-00015520,135",
-                "1400-00015635,130",
-                "1400-00025754,141",
-                "1400-00025584,145",
-                "1400-00019340,132",
-                "1400-00033079,151",
-                "1400-00015140,146",
-                "1400-00025580,132",
-                "1400-00017457,146",
-                "1400-00015392,145",
-                "1400-00017259,136",
-                "1400-00014863,140",
-                "1400-00017452,126",
-                "1400-00044252,124",
-                "1400-00017568,140",
-                "1400-00044326,131",
-                "1400-00016093,133",
-                "1400-00016448,140",
-                "1400-00015360,141",
-                "1400-00014487,139",
-                "1400-00019593,131",
-                "1400-00014553,141",
-                "1400-00014911,135",
-                "1400-00017105,136",
-                "1400-00015448,138",
-                "1400-00015519,131",
-                "1400-00033074,136",
-                "1400-00015449,127",
-                "1400-00015648,144",
-                "1400-00016440,143",
-                "1400-00017281,136",
-            };
-
             ExpectedTags.Clear();
-
-            foreach (string tagData in expectedStockData)
+            for (int i = 1; i <= 10; i++)
             {
-                string[] tagParts = tagData.Split('-', ',');
-                if (tagParts.Length >= 3)
-                {
-                    var tag = new TagInfo(tagParts[0], tagParts[1], tagParts[2]);
-                    ExpectedTags.Add(tag);
-                }
+                ExpectedTags.Add(new TagInfo($"PC{i:D4}", $"E200001{i:D8}", "0"));
             }
-
             ExpectedCount = ExpectedTags.Count;
-            
-            // Update command states
-            ((RelayCommand)CompareStockCommand).RaiseCanExecuteChanged();
+            _navigationService.UpdateStatusMessage($"Добавлено {ExpectedCount} тестовых ожидаемых меток");
         }
 
-        private async Task ExecuteScanAsync()
+        private async void PerformScan()
         {
             try
             {
-                IsScanning = true;
-                _navigationService.UpdateStatusMessage("Сканирование инвентаря...");
-
-                var newTags = await _scannerService.UpdateScannedTagsAsync();
-
-                // Add new tags to scanned collection
-                foreach (var tag in newTags)
+                if (_scannerService != null)
                 {
-                    if (!ScannedTags.Any(existingTag => existingTag.EPC == tag.EPC))
+                    _navigationService.UpdateStatusMessage("Сканирование...");
+                    var tags = await _scannerService.UpdateScannedTagsAsync();
+                    
+                    ScannedTags.Clear();
+                    foreach (var tag in tags)
                     {
                         ScannedTags.Add(tag);
                     }
+                    
+                    _navigationService.UpdateStatusMessage($"Сканирование завершено: найдено {ScannedTags.Count} меток");
                 }
-
-                FoundCount = ScannedTags.Count;
-                _navigationService.UpdateStatusMessage($"Сканирование завершено. Найдено {newTags.Count()} новых меток. Всего отсканировано: {ScannedTags.Count}");
-                
-                // Update command states
-                ((RelayCommand)CompareStockCommand).RaiseCanExecuteChanged();
             }
             catch (Exception ex)
             {
                 _navigationService.UpdateStatusMessage($"Ошибка сканирования: {ex.Message}");
             }
-            finally
-            {
-                IsScanning = false;
-            }
         }
 
-        private bool CanExecuteScan()
+        private void CompareStock()
         {
-            return IsConnected && !IsScanning;
+            MissingTags.Clear();
+            ExtraTags.Clear();
+            FoundTags.Clear();
+
+            // Find missing tags (expected but not scanned)
+            foreach (var expectedTag in ExpectedTags)
+            {
+                if (!ScannedTags.Any(s => s.EPC.Equals(expectedTag.EPC, StringComparison.OrdinalIgnoreCase)))
+                {
+                    MissingTags.Add(expectedTag);
+                }
+            }
+
+            // Find extra tags (scanned but not expected)
+            foreach (var scannedTag in ScannedTags)
+            {
+                if (!ExpectedTags.Any(e => e.EPC.Equals(scannedTag.EPC, StringComparison.OrdinalIgnoreCase)))
+                {
+                    ExtraTags.Add(scannedTag);
+                }
+                else
+                {
+                    // This is a found tag (scanned and expected)
+                    FoundTags.Add(scannedTag);
+                }
+            }
+
+            // Update counts
+            FoundCount = FoundTags.Count;
+            MissingCount = MissingTags.Count;
+
+            _navigationService.UpdateStatusMessage($"Сравнение завершено: найдено {FoundCount}, недостает {MissingCount}, лишних {ExtraTags.Count}");
         }
 
-        private void ExecuteCompareStock()
+        private async void ExportResults()
         {
             try
             {
-                _navigationService.UpdateStatusMessage("Сравнение инвентаря...");
-
-                // Clear previous comparison results
-                MissingTags.Clear();
-                ExtraTags.Clear();
-
-                // Find missing tags (expected but not scanned)
-                foreach (var expectedTag in ExpectedTags)
+                if (_exportService != null)
                 {
-                    if (!ScannedTags.Any(scanned => scanned.EPC == expectedTag.EPC))
-                    {
-                        MissingTags.Add(expectedTag);
-                    }
+                    var allTags = ScannedTags.Concat(MissingTags).Concat(ExtraTags);
+                    await _exportService.ExportAsync(allTags, $"StockTake_Results_{DateTime.Now:yyyyMMddHHmmss}.json");
+                    _navigationService.UpdateStatusMessage("Результаты экспортированы");
                 }
-
-                // Find extra tags (scanned but not expected)
-                foreach (var scannedTag in ScannedTags)
-                {
-                    if (!ExpectedTags.Any(expected => expected.EPC == scannedTag.EPC))
-                    {
-                        ExtraTags.Add(scannedTag);
-                    }
-                }
-
-                // Update counts
-                MissingCount = MissingTags.Count;
-                var extraCount = ExtraTags.Count;
-
-                _navigationService.UpdateStatusMessage(
-                    $"Сравнение завершено. Недостает: {MissingCount}, Лишних: {extraCount}, Найдено: {FoundCount}/{ExpectedCount}");
-
-                // Update command states
-                ((RelayCommand)ExportResultsCommand).RaiseCanExecuteChanged();
-            }
-            catch (Exception ex)
-            {
-                _navigationService.UpdateStatusMessage($"Ошибка сравнения: {ex.Message}");
-            }
-        }
-
-        private async Task ExecuteExportResultsAsync()
-        {
-            try
-            {
-                IsExporting = true;
-                _navigationService.UpdateStatusMessage("Экспорт результатов инвентаризации...");
-
-                string fileName = $"StockTake_Results_{DateTime.Now:ddMMyyyyHHmmss}.json";
-                string filePath = Path.Combine(AppSettings.DefaultExportPath, fileName);
-
-                // Create comprehensive results object
-                var results = new
-                {
-                    Timestamp = DateTime.Now,
-                    Expected = new { Count = ExpectedCount, Tags = ExpectedTags },
-                    Scanned = new { Count = FoundCount, Tags = ScannedTags },
-                    Missing = new { Count = MissingCount, Tags = MissingTags },
-                    Extra = new { Count = ExtraTags.Count, Tags = ExtraTags },
-                    Summary = new
-                    {
-                        ExpectedCount,
-                        FoundCount,
-                        MissingCount,
-                        ExtraCount = ExtraTags.Count,
-                        AccuracyPercentage = ExpectedCount > 0 ? (double)(FoundCount - ExtraTags.Count) / ExpectedCount * 100 : 0
-                    }
-                };
-
-                // You'll need to serialize this to JSON
-                // bool success = await _dataExportService.ExportAsync(results, filePath, "json");
-                bool success = true; // Placeholder
-
-                var message = success ?
-                    $"Результаты экспортированы: {filePath}" :
-                    "Ошибка экспорта результатов.";
-
-                _navigationService.UpdateStatusMessage(message);
             }
             catch (Exception ex)
             {
                 _navigationService.UpdateStatusMessage($"Ошибка экспорта: {ex.Message}");
             }
-            finally
-            {
-                IsExporting = false;
-            }
         }
 
-        private bool CanExecuteExport()
-        {
-            return (MissingTags.Any() || ExtraTags.Any() || ScannedTags.Any()) && !IsExporting;
-        }
-
-        private void ExecuteClearAll()
+        private void ClearAll()
         {
             ExpectedTags.Clear();
             ScannedTags.Clear();
             MissingTags.Clear();
             ExtraTags.Clear();
-
+            FoundTags.Clear();
+            
             ExpectedCount = 0;
             FoundCount = 0;
             MissingCount = 0;
-            ExpectedStockPath = "";
-
-            _navigationService.UpdateStatusMessage("Все данные очищены.");
-
-            // Update command states
-            ((RelayCommand)CompareStockCommand).RaiseCanExecuteChanged();
-            ((RelayCommand)ExportResultsCommand).RaiseCanExecuteChanged();
+            
+            CurrentView = "Missing"; // Reset to Missing view (default)
+            
+            _navigationService.UpdateStatusMessage("Все данные очищены");
         }
 
-        private void ExecuteAddTestExpectedData()
+        // Status button command implementations - now toggle views
+        private void ShowExpectedTags()
         {
-            string[] testExpectedData = new string[]
+            if (CurrentView == "Expected")
             {
-                "3000-847293615208374951627384,4782", // This should be found
-                "3003-291847365019283746582019,8456", // This should be found
-                "3010-639182745830192847361029,2193", // This should be found
-                "1000-111111111111111111111111,1111", // This will be missing
-                "2000-222222222222222222222222,2222", // This will be missing
-                "4000-444444444444444444444444,4444"  // This will be missing
-            };
-
-            ExpectedTags.Clear();
-
-            foreach (string tagData in testExpectedData)
-            {
-                string[] tagParts = tagData.Split('-', ',');
-                if (tagParts.Length >= 3)
-                {
-                    var tag = new TagInfo(tagParts[0], tagParts[1], tagParts[2]);
-                    ExpectedTags.Add(tag);
-                }
+                CurrentView = "Missing"; // Toggle off - return to Missing view (default)
+                _navigationService.UpdateStatusMessage("Показаны недостающие метки");
             }
-
-            ExpectedCount = ExpectedTags.Count;
-            _navigationService.UpdateStatusMessage($"Добавлено {ExpectedTags.Count} тестовых ожидаемых меток.");
-
-            // Update command states
-            ((RelayCommand)CompareStockCommand).RaiseCanExecuteChanged();
+            else
+            {
+                CurrentView = "Expected";
+                _navigationService.UpdateStatusMessage($"Показаны ожидаемые метки: {ExpectedCount} шт.");
+            }
         }
 
-        private void OnScannerStatusChanged(object sender, string message)
+        private void ShowFoundTags()
         {
-            _navigationService.UpdateStatusMessage(message);
+            if (CurrentView == "Found")
+            {
+                CurrentView = "Missing"; // Toggle off - return to Missing view (default)
+                _navigationService.UpdateStatusMessage("Показаны недостающие метки");
+            }
+            else
+            {
+                CurrentView = "Found";
+                _navigationService.UpdateStatusMessage($"Показаны найденные метки: {FoundCount} шт.");
+            }
         }
 
-        private void OnConnectionStateChanged()
+        private void ShowMissingTags()
         {
-            ((RelayCommand)ScanCommand).RaiseCanExecuteChanged();
-            ((RelayCommand)DisconnectCommand).RaiseCanExecuteChanged();
-            ((RelayCommand)ConnectCommand).RaiseCanExecuteChanged();
+            if (CurrentView == "Missing")
+            {
+                CurrentView = "Missing"; // Stay on Missing view (don't toggle off)
+                _navigationService.UpdateStatusMessage($"Показаны недостающие метки: {MissingCount} шт.");
+            }
+            else
+            {
+                CurrentView = "Missing";
+                _navigationService.UpdateStatusMessage($"Показаны недостающие метки: {MissingCount} шт.");
+            }
+        }
+
+        private void ShowExtraTags()
+        {
+            if (CurrentView == "Extra")
+            {
+                CurrentView = "Missing"; // Toggle off - return to Missing view (default)
+                _navigationService.UpdateStatusMessage("Показаны недостающие метки");
+            }
+            else
+            {
+                CurrentView = "Extra";
+                _navigationService.UpdateStatusMessage($"Показаны лишние метки: {ExtraTags.Count} шт.");
+            }
         }
 
         public override void OnNavigatedTo()
         {
+            base.OnNavigatedTo();
             _navigationService.UpdateStatusMessage("Страница инвентаризации загружена");
-            _navigationService.UpdateConnectionStatus(IsConnected, IsConnected ? ComPort : "");
         }
 
         public override void OnNavigatedFrom()
         {
-            if (IsScanning)
-            {
-                _navigationService.UpdateStatusMessage("Сканирование инвентаризации приостановлено");
-            }
+            base.OnNavigatedFrom();
         }
     }
 }

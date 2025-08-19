@@ -17,7 +17,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Summary Panel -->
+            <!-- Summary Panel with Clickable Status Buttons -->
             <Border Grid.Row="0" Background="#ECF0F1" CornerRadius="5" Margin="0,0,0,10">
                 <Grid Margin="15,10">
                     <Grid.ColumnDefinitions>
@@ -27,155 +27,285 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                        <TextBlock Text="Ожидается" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding ExpectedCount}" FontSize="24" FontWeight="Bold" 
-                                   Foreground="#3498DB" HorizontalAlignment="Center"/>
-                    </StackPanel>
+                    <!-- Expected Button -->
+                    <Button Grid.Column="0" 
+                            Command="{Binding ShowExpectedCommand}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="10,5"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D5DBDB"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#BDC3C7"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Ожидается" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding ExpectedCount}" FontSize="24" FontWeight="Bold" 
+                                       Foreground="#3498DB" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
 
-                    <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                        <TextBlock Text="Найдено" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding FoundCount}" FontSize="24" FontWeight="Bold" 
-                                   Foreground="#27AE60" HorizontalAlignment="Center"/>
-                    </StackPanel>
+                    <!-- Found Button -->
+                    <Button Grid.Column="1" 
+                            Command="{Binding ShowFoundCommand}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="10,5"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D5DBDB"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#BDC3C7"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Найдено" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding FoundCount}" FontSize="24" FontWeight="Bold" 
+                                       Foreground="#27AE60" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
 
-                    <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                        <TextBlock Text="Недостает" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding MissingCount}" FontSize="24" FontWeight="Bold" 
-                                   Foreground="#E74C3C" HorizontalAlignment="Center"/>
-                    </StackPanel>
+                    <!-- Missing Button -->
+                    <Button Grid.Column="2" 
+                            Command="{Binding ShowMissingCommand}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="10,5"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D5DBDB"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#BDC3C7"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Недостает" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding MissingCount}" FontSize="24" FontWeight="Bold" 
+                                       Foreground="#E74C3C" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
 
-                    <StackPanel Grid.Column="3" HorizontalAlignment="Center">
-                        <TextBlock Text="Лишних" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding ExtraTags.Count}" FontSize="24" FontWeight="Bold" 
-                                   Foreground="#F39C12" HorizontalAlignment="Center"/>
-                    </StackPanel>
+                    <!-- Extra Button -->
+                    <Button Grid.Column="3" 
+                            Command="{Binding ShowExtraCommand}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="10,5"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D5DBDB"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#BDC3C7"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Лишних" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding ExtraTags.Count}" FontSize="24" FontWeight="Bold" 
+                                       Foreground="#F39C12" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </Border>
 
-            <!-- Results Display -->
+            <!-- Results Display - Single View that Changes Based on Selection -->
             <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                <!-- Expected Tags View -->
+                <Border Background="#dbeef3" CornerRadius="5">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                <!-- Expected vs Scanned Comparison -->
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Text="Ожидаемые метки" 
+                                   FontSize="18" FontWeight="Bold" 
+                                   Foreground="#3498db" Margin="15,10,15,5"/>
 
-                    <!-- Expected Tags -->
-                    <Border Grid.Column="0" Background="#E8F6F3" CornerRadius="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
+                        <ListView Grid.Row="1" ItemsSource="{Binding ExpectedTags}"
+                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="250"/>
+                                    <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="80"/>
+                                    <GridViewColumn Header="PC" DisplayMemberBinding="{Binding PC}" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Border>
 
-                            <TextBlock Grid.Row="0" Text="Ожидаемые метки" 
-                                       FontSize="16" FontWeight="Bold" 
-                                       Foreground="#27AE60" Margin="15,10,15,5"/>
+                <!-- Found Tags View (Scanned Tags filtered to show only found ones) -->
+                <Border Background="#E6F7E6" CornerRadius="5">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                            <ListView Grid.Row="1" ItemsSource="{Binding ExpectedTags}"
-                                      Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
-                                <ListView.View>
-                                    <GridView AllowsColumnReorder="False">
-                                        <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="180"/>
-                                        <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="60"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Grid>
-                    </Border>
+                        <TextBlock Grid.Row="0" Text="Найденные метки" 
+                                   FontSize="18" FontWeight="Bold" 
+                                   Foreground="#27AE60" Margin="15,10,15,5"/>
 
-                    <!-- Scanned Tags -->
-                    <Border Grid.Column="2" Background="#EBF5FB" CornerRadius="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
+                        <ListView Grid.Row="1" ItemsSource="{Binding FoundTags}"
+                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="250"/>
+                                    <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="80"/>
+                                    <GridViewColumn Header="PC" DisplayMemberBinding="{Binding PC}" Width="100"/>
+                                    <GridViewColumn Header="Время" DisplayMemberBinding="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Border>
 
-                            <TextBlock Grid.Row="0" Text="Отсканированные метки" 
-                                       FontSize="16" FontWeight="Bold" 
-                                       Foreground="#3498DB" Margin="15,10,15,5"/>
+                <!-- Missing Tags View -->
+                <Border Background="#FDEDEC" CornerRadius="5">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                            <ListView Grid.Row="1" ItemsSource="{Binding ScannedTags}"
-                                      Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
-                                <ListView.View>
-                                    <GridView AllowsColumnReorder="False">
-                                        <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="180"/>
-                                        <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="60"/>
-                                        <GridViewColumn Header="Время" DisplayMemberBinding="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" Width="70"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Grid>
-                    </Border>
-                </Grid>
+                        <TextBlock Grid.Row="0" Text="Недостающие метки" 
+                                   FontSize="18" FontWeight="Bold" 
+                                   Foreground="#E74C3C" Margin="15,10,15,5"/>
 
-                <!-- Missing and Extra Tags -->
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                        <ListView Grid.Row="1" ItemsSource="{Binding MissingTags}"
+                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="250"/>
+                                    <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="80"/>
+                                    <GridViewColumn Header="PC" DisplayMemberBinding="{Binding PC}" Width="100"/>
+                                    <GridViewColumn Header="Статус" Width="120">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="Не найдено" Foreground="#E74C3C" FontWeight="Bold"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Border>
 
-                    <!-- Missing Tags -->
-                    <Border Grid.Column="0" Background="#FDEDEC" CornerRadius="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
+                <!-- Extra Tags View -->
+                <Border Background="#FEF9E7" CornerRadius="5">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Text="Недостающие метки" 
-                                       FontSize="16" FontWeight="Bold" 
-                                       Foreground="#E74C3C" Margin="15,10,15,5"/>
+                        <TextBlock Grid.Row="0" Text="Лишние метки" 
+                                   FontSize="18" FontWeight="Bold" 
+                                   Foreground="#F39C12" Margin="15,10,15,5"/>
 
-                            <ListView Grid.Row="1" ItemsSource="{Binding MissingTags}"
-                                      Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
-                                <ListView.View>
-                                    <GridView AllowsColumnReorder="False">
-                                        <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="180"/>
-                                        <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="60"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Grid>
-                    </Border>
+                        <ListView Grid.Row="1" ItemsSource="{Binding ExtraTags}"
+                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="250"/>
+                                    <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="80"/>
+                                    <GridViewColumn Header="PC" DisplayMemberBinding="{Binding PC}" Width="100"/>
+                                    <GridViewColumn Header="Время" DisplayMemberBinding="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" Width="100"/>
+                                    <GridViewColumn Header="Статус" Width="120">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="Не ожидается" Foreground="#F39C12" FontWeight="Bold"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Border>
 
-                    <!-- Extra Tags -->
-                    <Border Grid.Column="2" Background="#FEF9E7" CornerRadius="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Text="Лишние метки" 
-                                       FontSize="16" FontWeight="Bold" 
-                                       Foreground="#F39C12" Margin="15,10,15,5"/>
-
-                            <ListView Grid.Row="1" ItemsSource="{Binding ExtraTags}"
-                                      Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
-                                <ListView.View>
-                                    <GridView AllowsColumnReorder="False">
-                                        <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="180"/>
-                                        <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="60"/>
-                                        <GridViewColumn Header="Время" DisplayMemberBinding="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" Width="70"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Grid>
-                    </Border>
-                </Grid>
             </Grid>
         </Grid>
 
