@@ -88,6 +88,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\AppSettings.cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Services\ExportJsonService.cs" />
     <Compile Include="Services\Interfaces\IApiService.cs" />
     <Compile Include="Services\Interfaces\IDataExportService.cs" />

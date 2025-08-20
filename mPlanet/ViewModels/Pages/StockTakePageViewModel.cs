@@ -16,6 +16,10 @@ namespace mPlanet.ViewModels.Pages
         private string _comPort = "COM3";
         private bool _isConnected = false;
         private string _currentView = "Missing"; // Default to Missing view
+        
+        // Settings for taglist views
+        private bool _showPhotos = false;
+        private bool _isGridView = true; // true for grid view, false for list view
 
         // Collections
         private ObservableCollection<TagInfo> _expectedTags = new ObservableCollection<TagInfo>();
@@ -94,6 +98,18 @@ namespace mPlanet.ViewModels.Pages
         {
             get => _missingCount;
             set => SetProperty(ref _missingCount, value);
+        }
+
+        public bool ShowPhotos
+        {
+            get => _showPhotos;
+            set => SetProperty(ref _showPhotos, value);
+        }
+
+        public bool IsGridView
+        {
+            get => _isGridView;
+            set => SetProperty(ref _isGridView, value);
         }
 
         // Commands

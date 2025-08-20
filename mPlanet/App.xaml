@@ -2,8 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:mPlanet"
+             xmlns:converters="clr-namespace:mPlanet.Converters"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
+        
+        <!-- Converters -->
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
         
         <!-- Custom Button Style with rounded corners and hover effects -->
         <!-- This style will be applied to ALL buttons in the application -->
