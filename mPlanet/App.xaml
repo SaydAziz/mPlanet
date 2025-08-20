@@ -8,6 +8,8 @@
         
         <!-- Converters -->
         <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <converters:PhotoVisibilityConverter x:Key="PhotoVisibilityConverter"/>
+        <converters:PhotoSourceConverter x:Key="PhotoSourceConverter"/>
         
         <!-- Custom Button Style with rounded corners and hover effects -->
         <!-- This style will be applied to ALL buttons in the application -->

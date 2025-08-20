@@ -8,13 +8,15 @@ namespace mPlanet.Models
         public string EPC { get; set; }
         public string RSSI { get; set; }
         public DateTime ScanTime { get; set; }
+        public string Photo { get; set; }
 
-        public TagInfo(string pc, string epc, string rssi)
+        public TagInfo(string pc, string epc, string rssi, string photo = null)
         {
             PC = pc;
             EPC = epc;
             RSSI = rssi;
             ScanTime = DateTime.Now;
+            Photo = photo;
         }
 
         public bool Equals(TagInfo other)
