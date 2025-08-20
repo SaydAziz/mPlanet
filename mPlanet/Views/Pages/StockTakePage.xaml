@@ -218,53 +218,106 @@
                         </Border>
 
                         <ListView Grid.Row="2" ItemsSource="{Binding ExpectedTags}"
-                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
+                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <ListView.Style>
                                 <Style TargetType="ListView" BasedOn="{StaticResource {x:Type ListView}}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsGridView}" Value="True">
-                                            <Setter Property="View">
+                                            <Setter Property="ItemsPanel">
                                                 <Setter.Value>
-                                                    <GridView AllowsColumnReorder="False">
-                                                        <GridViewColumn Header="Photo" Width="90">
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <Border Width="70" Height="50" Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
-                                                                        <Border.Visibility>
-                                                                            <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
-                                                                                <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                                <Binding Path="Photo"/>
-                                                                            </MultiBinding>
-                                                                        </Border.Visibility>
-                                                                        <Grid>
-                                                                            <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
-                                                                                   Stretch="UniformToFill"/>
-                                                                            <TextBlock Text="Not found" 
-                                                                                       FontSize="9" 
-                                                                                       Foreground="Gray" 
-                                                                                       HorizontalAlignment="Center" 
-                                                                                       VerticalAlignment="Center"
-                                                                                       TextWrapping="Wrap">
-                                                                                <TextBlock.Style>
-                                                                                    <Style TargetType="TextBlock">
-                                                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
-                                                                                                <Setter Property="Visibility" Value="Visible"/>
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </TextBlock.Style>
-                                                                            </TextBlock>
-                                                                        </Grid>
-                                                                    </Border>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="250"/>
-                                                        <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="80"/>
-                                                        <GridViewColumn Header="PC" DisplayMemberBinding="{Binding PC}" Width="100"/>
-                                                    </GridView>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="ItemContainerStyle">
+                                                <Setter.Value>
+                                                    <Style TargetType="ListViewItem">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="BorderThickness" Value="0"/>
+                                                        <Setter Property="Padding" Value="0"/>
+                                                        <Setter Property="Margin" Value="0"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="ListViewItem">
+                                                                    <ContentPresenter/>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="ItemTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Border Width="140" Height="160" Margin="5" 
+                                                                Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
+                                                                CornerRadius="3">
+                                                            <Border.Style>
+                                                                <Style TargetType="Border">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" Value="True">
+                                                                            <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                                            <Setter Property="BorderThickness" Value="2"/>
+                                                                            <Setter Property="Background" Value="#E3F2FD"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                            <Grid Margin="5">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="*"/>
+                                                                </Grid.RowDefinitions>
+                                                                
+                                                                <!-- Tag Information at top -->
+                                                                <StackPanel Grid.Row="0" Margin="0,0,0,5">
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
+                                                                               TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                                                                        <TextBlock Text="R:" FontSize="8" Foreground="Gray"/>
+                                                                        <TextBlock Text="{Binding RSSI}" FontSize="8" Foreground="Gray"/>
+                                                                        <TextBlock Text=" P:" FontSize="8" Foreground="Gray" Margin="3,0,0,0"/>
+                                                                        <TextBlock Text="{Binding PC}" FontSize="8" Foreground="Gray"/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
+                                                                
+                                                                <!-- Photo at bottom -->
+                                                                <Border Grid.Row="1" Background="#F0F0F0" BorderBrush="#BDC3C7" 
+                                                                        BorderThickness="1" CornerRadius="2">
+                                                                    <Border.Visibility>
+                                                                        <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
+                                                                            <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
+                                                                            <Binding Path="Photo"/>
+                                                                        </MultiBinding>
+                                                                    </Border.Visibility>
+                                                                    <Grid>
+                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                               Stretch="UniformToFill"/>
+                                                                        <TextBlock Text="No photo" 
+                                                                                   FontSize="8" 
+                                                                                   Foreground="Gray" 
+                                                                                   HorizontalAlignment="Center" 
+                                                                                   VerticalAlignment="Center"
+                                                                                   TextWrapping="Wrap">
+                                                                            <TextBlock.Style>
+                                                                                <Style TargetType="TextBlock">
+                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                    <Style.Triggers>
+                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                                                        </DataTrigger>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </TextBlock.Style>
+                                                                        </TextBlock>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
@@ -407,54 +460,108 @@
                         </Border>
 
                         <ListView Grid.Row="2" ItemsSource="{Binding FoundTags}"
-                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
+                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <ListView.Style>
                                 <Style TargetType="ListView" BasedOn="{StaticResource {x:Type ListView}}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsGridView}" Value="True">
-                                            <Setter Property="View">
+                                            <Setter Property="ItemsPanel">
                                                 <Setter.Value>
-                                                    <GridView AllowsColumnReorder="False">
-                                                        <GridViewColumn Header="Photo" Width="90">
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <Border Width="70" Height="50" Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
-                                                                        <Border.Visibility>
-                                                                            <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
-                                                                                <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                                <Binding Path="Photo"/>
-                                                                            </MultiBinding>
-                                                                        </Border.Visibility>
-                                                                        <Grid>
-                                                                            <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
-                                                                                   Stretch="UniformToFill"/>
-                                                                            <TextBlock Text="Not found" 
-                                                                                       FontSize="9" 
-                                                                                       Foreground="Gray" 
-                                                                                       HorizontalAlignment="Center" 
-                                                                                       VerticalAlignment="Center"
-                                                                                       TextWrapping="Wrap">
-                                                                                <TextBlock.Style>
-                                                                                    <Style TargetType="TextBlock">
-                                                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
-                                                                                                <Setter Property="Visibility" Value="Visible"/>
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </TextBlock.Style>
-                                                                            </TextBlock>
-                                                                        </Grid>
-                                                                    </Border>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="250"/>
-                                                        <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="80"/>
-                                                        <GridViewColumn Header="PC" DisplayMemberBinding="{Binding PC}" Width="100"/>
-                                                        <GridViewColumn Header="Время" DisplayMemberBinding="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" Width="100"/>
-                                                    </GridView>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="ItemContainerStyle">
+                                                <Setter.Value>
+                                                    <Style TargetType="ListViewItem">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="BorderThickness" Value="0"/>
+                                                        <Setter Property="Padding" Value="0"/>
+                                                        <Setter Property="Margin" Value="0"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="ListViewItem">
+                                                                    <ContentPresenter/>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="ItemTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Border Width="140" Height="170" Margin="5" 
+                                                                Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
+                                                                CornerRadius="3">
+                                                            <Border.Style>
+                                                                <Style TargetType="Border">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" Value="True">
+                                                                            <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                                            <Setter Property="BorderThickness" Value="2"/>
+                                                                            <Setter Property="Background" Value="#E3F2FD"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                            <Grid Margin="5">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="*"/>
+                                                                </Grid.RowDefinitions>
+                                                                
+                                                                <!-- Tag Information at top -->
+                                                                <StackPanel Grid.Row="0" Margin="0,0,0,5">
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
+                                                                               TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                                                                        <TextBlock Text="R:" FontSize="8" Foreground="Gray"/>
+                                                                        <TextBlock Text="{Binding RSSI}" FontSize="8" Foreground="Gray"/>
+                                                                        <TextBlock Text=" P:" FontSize="8" Foreground="Gray" Margin="3,0,0,0"/>
+                                                                        <TextBlock Text="{Binding PC}" FontSize="8" Foreground="Gray"/>
+                                                                    </StackPanel>
+                                                                    <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
+                                                                               FontSize="8" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                </StackPanel>
+                                                                
+                                                                <!-- Photo at bottom -->
+                                                                <Border Grid.Row="1" Background="#F0F0F0" BorderBrush="#BDC3C7" 
+                                                                        BorderThickness="1" CornerRadius="2">
+                                                                    <Border.Visibility>
+                                                                        <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
+                                                                            <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
+                                                                            <Binding Path="Photo"/>
+                                                                        </MultiBinding>
+                                                                    </Border.Visibility>
+                                                                    <Grid>
+                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                               Stretch="UniformToFill"/>
+                                                                        <TextBlock Text="No photo" 
+                                                                                   FontSize="8" 
+                                                                                   Foreground="Gray" 
+                                                                                   HorizontalAlignment="Center" 
+                                                                                   VerticalAlignment="Center"
+                                                                                   TextWrapping="Wrap">
+                                                                            <TextBlock.Style>
+                                                                                <Style TargetType="TextBlock">
+                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                    <Style.Triggers>
+                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                                                        </DataTrigger>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </TextBlock.Style>
+                                                                        </TextBlock>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
@@ -605,54 +712,109 @@
                         </Border>
 
                         <ListView Grid.Row="2" ItemsSource="{Binding MissingTags}"
-                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
+                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <ListView.Style>
                                 <Style TargetType="ListView" BasedOn="{StaticResource {x:Type ListView}}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsGridView}" Value="True">
-                                            <Setter Property="View">
+                                            <Setter Property="ItemsPanel">
                                                 <Setter.Value>
-                                                    <GridView AllowsColumnReorder="False">
-                                                        <GridViewColumn Header="Photo" Width="90">
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <Border Width="70" Height="50" Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
-                                                                        <Border.Visibility>
-                                                                            <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
-                                                                                <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                                <Binding Path="Photo"/>
-                                                                            </MultiBinding>
-                                                                        </Border.Visibility>
-                                                                        <Grid>
-                                                                            <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Stretch="UniformToFill"/>
-                                                                            <TextBlock Text="Not found" FontSize="9" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">
-                                                                                <TextBlock.Style>
-                                                                                    <Style TargetType="TextBlock">
-                                                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
-                                                                                                <Setter Property="Visibility" Value="Visible"/>
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </TextBlock.Style>
-                                                                            </TextBlock>
-                                                                        </Grid>
-                                                                    </Border>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="250"/>
-                                                        <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="80"/>
-                                                        <GridViewColumn Header="PC" DisplayMemberBinding="{Binding PC}" Width="100"/>
-                                                        <GridViewColumn Header="Статус" Width="120">
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <TextBlock Text="Не найдено" Foreground="#E74C3C" FontWeight="Bold"/>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                    </GridView>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="ItemContainerStyle">
+                                                <Setter.Value>
+                                                    <Style TargetType="ListViewItem">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="BorderThickness" Value="0"/>
+                                                        <Setter Property="Padding" Value="0"/>
+                                                        <Setter Property="Margin" Value="0"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="ListViewItem">
+                                                                    <ContentPresenter/>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="ItemTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Border Width="140" Height="175" Margin="5" 
+                                                                Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
+                                                                CornerRadius="3">
+                                                            <Border.Style>
+                                                                <Style TargetType="Border">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" Value="True">
+                                                                            <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                                            <Setter Property="BorderThickness" Value="2"/>
+                                                                            <Setter Property="Background" Value="#E3F2FD"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                            <Grid Margin="5">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="*"/>
+                                                                </Grid.RowDefinitions>
+                                                                
+                                                                <!-- Tag Information at top -->
+                                                                <StackPanel Grid.Row="0" Margin="0,0,0,5">
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
+                                                                               TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                                                                        <TextBlock Text="R:" FontSize="8" Foreground="Gray"/>
+                                                                        <TextBlock Text="{Binding RSSI}" FontSize="8" Foreground="Gray"/>
+                                                                        <TextBlock Text=" P:" FontSize="8" Foreground="Gray" Margin="3,0,0,0"/>
+                                                                        <TextBlock Text="{Binding PC}" FontSize="8" Foreground="Gray"/>
+                                                                    </StackPanel>
+                                                                    <TextBlock Text="Не найдено" 
+                                                                               FontSize="8" Foreground="#E74C3C" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                </StackPanel>
+                                                                
+                                                                <!-- Photo at bottom -->
+                                                                <Border Grid.Row="1" Background="#F0F0F0" BorderBrush="#BDC3C7" 
+                                                                        BorderThickness="1" CornerRadius="2">
+                                                                    <Border.Visibility>
+                                                                        <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
+                                                                            <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
+                                                                            <Binding Path="Photo"/>
+                                                                        </MultiBinding>
+                                                                    </Border.Visibility>
+                                                                    <Grid>
+                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                               Stretch="UniformToFill"/>
+                                                                        <TextBlock Text="No photo" 
+                                                                                   FontSize="8" 
+                                                                                   Foreground="Gray" 
+                                                                                   HorizontalAlignment="Center" 
+                                                                                   VerticalAlignment="Center"
+                                                                                   TextWrapping="Wrap">
+                                                                            <TextBlock.Style>
+                                                                                <Style TargetType="TextBlock">
+                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                    <Style.Triggers>
+                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                                                        </DataTrigger>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </TextBlock.Style>
+                                                                        </TextBlock>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
@@ -797,55 +959,111 @@
                         </Border>
 
                         <ListView Grid.Row="2" ItemsSource="{Binding ExtraTags}"
-                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0">
+                                  Margin="10,5,10,10" Background="Transparent" BorderThickness="0"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <ListView.Style>
                                 <Style TargetType="ListView" BasedOn="{StaticResource {x:Type ListView}}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsGridView}" Value="True">
-                                            <Setter Property="View">
+                                            <Setter Property="ItemsPanel">
                                                 <Setter.Value>
-                                                    <GridView AllowsColumnReorder="False">
-                                                        <GridViewColumn Header="Photo" Width="90">
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <Border Width="70" Height="50" Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
-                                                                        <Border.Visibility>
-                                                                            <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
-                                                                                <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                                <Binding Path="Photo"/>
-                                                                            </MultiBinding>
-                                                                        </Border.Visibility>
-                                                                        <Grid>
-                                                                            <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Stretch="UniformToFill"/>
-                                                                            <TextBlock Text="Not found" FontSize="9" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">
-                                                                                <TextBlock.Style>
-                                                                                    <Style TargetType="TextBlock">
-                                                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
-                                                                                                <Setter Property="Visibility" Value="Visible"/>
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </TextBlock.Style>
-                                                                            </TextBlock>
-                                                                        </Grid>
-                                                                    </Border>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Header="EPC" DisplayMemberBinding="{Binding EPC}" Width="250"/>
-                                                        <GridViewColumn Header="RSSI" DisplayMemberBinding="{Binding RSSI}" Width="80"/>
-                                                        <GridViewColumn Header="PC" DisplayMemberBinding="{Binding PC}" Width="100"/>
-                                                        <GridViewColumn Header="Время" DisplayMemberBinding="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" Width="100"/>
-                                                        <GridViewColumn Header="Статус" Width="120">
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <TextBlock Text="Не ожидается" Foreground="#F39C12" FontWeight="Bold"/>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                    </GridView>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="ItemContainerStyle">
+                                                <Setter.Value>
+                                                    <Style TargetType="ListViewItem">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="BorderThickness" Value="0"/>
+                                                        <Setter Property="Padding" Value="0"/>
+                                                        <Setter Property="Margin" Value="0"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="ListViewItem">
+                                                                    <ContentPresenter/>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="ItemTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Border Width="140" Height="185" Margin="5" 
+                                                                Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
+                                                                CornerRadius="3">
+                                                            <Border.Style>
+                                                                <Style TargetType="Border">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" Value="True">
+                                                                            <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                                            <Setter Property="BorderThickness" Value="2"/>
+                                                                            <Setter Property="Background" Value="#E3F2FD"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                            <Grid Margin="5">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="*"/>
+                                                                </Grid.RowDefinitions>
+                                                                
+                                                                <!-- Tag Information at top -->
+                                                                <StackPanel Grid.Row="0" Margin="0,0,0,5">
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
+                                                                               TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                                                                        <TextBlock Text="R:" FontSize="8" Foreground="Gray"/>
+                                                                        <TextBlock Text="{Binding RSSI}" FontSize="8" Foreground="Gray"/>
+                                                                        <TextBlock Text=" P:" FontSize="8" Foreground="Gray" Margin="3,0,0,0"/>
+                                                                        <TextBlock Text="{Binding PC}" FontSize="8" Foreground="Gray"/>
+                                                                    </StackPanel>
+                                                                    <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
+                                                                               FontSize="8" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="Не ожидается" 
+                                                                               FontSize="8" Foreground="#F39C12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                </StackPanel>
+                                                                
+                                                                <!-- Photo at bottom -->
+                                                                <Border Grid.Row="1" Background="#F0F0F0" BorderBrush="#BDC3C7" 
+                                                                        BorderThickness="1" CornerRadius="2">
+                                                                    <Border.Visibility>
+                                                                        <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
+                                                                            <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
+                                                                            <Binding Path="Photo"/>
+                                                                        </MultiBinding>
+                                                                    </Border.Visibility>
+                                                                    <Grid>
+                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                               Stretch="UniformToFill"/>
+                                                                        <TextBlock Text="No photo" 
+                                                                                   FontSize="8" 
+                                                                                   Foreground="Gray" 
+                                                                                   HorizontalAlignment="Center" 
+                                                                                   VerticalAlignment="Center"
+                                                                                   TextWrapping="Wrap">
+                                                                            <TextBlock.Style>
+                                                                                <Style TargetType="TextBlock">
+                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                    <Style.Triggers>
+                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                                                        </DataTrigger>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </TextBlock.Style>
+                                                                        </TextBlock>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
