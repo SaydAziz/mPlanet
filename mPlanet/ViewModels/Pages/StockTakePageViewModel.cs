@@ -197,9 +197,22 @@ namespace mPlanet.ViewModels.Pages
         private void AddTestExpectedData()
         {
             ExpectedTags.Clear();
+            string[] jewelryTypes = { "Ring", "Necklace", "Earrings", "Bracelet", "Brooch" };
+            
             for (int i = 1; i <= 10; i++)
             {
-                ExpectedTags.Add(new TagInfo($"PC{i:D4}", $"E200001{i:D8}", "0"));
+                // Create image path based on jewelry type
+                string jewelryType = jewelryTypes[(i-1) % jewelryTypes.Length];
+                string imagePath = $"Assets/TestImages/{jewelryType.ToLower()}_{i:D3}.jpg";
+                
+                var jewelryInfo = new JewelryProductInfo(
+                    productId: $"JW{i:D4}", 
+                    boxNumber: $"BOX{(i-1)/2 + 1:D2}", 
+                    jewelryType: jewelryType,
+                    photo: imagePath
+                );
+                
+                ExpectedTags.Add(new TagInfo($"PC{i:D4}", $"E200001{i:D8}", "0", jewelryInfo));
             }
             ExpectedCount = ExpectedTags.Count;
             _navigationService.UpdateStatusMessage($"Добавлено {ExpectedCount} тестовых ожидаемых меток");

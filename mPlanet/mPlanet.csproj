@@ -98,6 +98,8 @@
     <Compile Include="Services\Interfaces\IRfidScannerService.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
     <Compile Include="Infrastructure\ViewModelBase.cs" />
+    <Compile Include="Models\IProductInfo.cs" />
+    <Compile Include="Models\JewelryProductInfo.cs" />
     <Compile Include="Models\TagInfo.cs" />
     <Compile Include="ViewModels\Pages\MainPageViewModel.cs" />
     <Compile Include="ViewModels\Pages\SettingsPageViewModel.cs" />
@@ -173,6 +175,10 @@
   <ItemGroup>
     <Resource Include="Assets\Icons\MainIcon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\TestImages\*.jpg" />
+    <Resource Include="Assets\TestImages\*.png" />
+    <Resource Include="Assets\TestImages\README.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

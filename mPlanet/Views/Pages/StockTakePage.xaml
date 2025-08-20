@@ -276,12 +276,12 @@
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
                                                                                TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                                                                        <TextBlock Text="R:" FontSize="8" Foreground="Gray"/>
-                                                                        <TextBlock Text="{Binding RSSI}" FontSize="8" Foreground="Gray"/>
-                                                                        <TextBlock Text=" P:" FontSize="8" Foreground="Gray" Margin="3,0,0,0"/>
-                                                                        <TextBlock Text="{Binding PC}" FontSize="8" Foreground="Gray"/>
-                                                                    </StackPanel>
+                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="8" 
+                                                                               Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="8" 
+                                                                               Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="8" 
+                                                                               Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                 </StackPanel>
                                                                 
                                                                 <!-- Photo at bottom -->
@@ -290,11 +290,11 @@
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
                                                                             <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                            <Binding Path="Photo"/>
+                                                                            <Binding Path="ProductInfo.Photo"/>
                                                                         </MultiBinding>
                                                                     </Border.Visibility>
                                                                     <Grid>
-                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                        <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="No photo" 
                                                                                    FontSize="8" 
@@ -306,7 +306,7 @@
                                                                                 <Style TargetType="TextBlock">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                        <DataTrigger Binding="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
                                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
@@ -337,11 +337,11 @@
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
                                                                             <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                            <Binding Path="Photo"/>
+                                                                            <Binding Path="ProductInfo.Photo"/>
                                                                         </MultiBinding>
                                                                     </Border.Visibility>
                                                                     <Grid>
-                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                        <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="Photo not found" 
                                                                                    FontSize="10" 
@@ -353,7 +353,7 @@
                                                                                 <Style TargetType="TextBlock">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                        <DataTrigger Binding="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
                                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
@@ -366,10 +366,12 @@
                                                                 <StackPanel Grid.Column="1">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="RSSI: " FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text="{Binding RSSI}" FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text=" | PC: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding PC}" FontSize="12" Foreground="Gray"/>
+                                                                        <TextBlock Text="Box: " FontSize="12" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="12" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="12" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="12" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="12" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="12" Foreground="Purple"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                             </Grid>
@@ -518,12 +520,12 @@
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
                                                                                TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                                                                        <TextBlock Text="R:" FontSize="8" Foreground="Gray"/>
-                                                                        <TextBlock Text="{Binding RSSI}" FontSize="8" Foreground="Gray"/>
-                                                                        <TextBlock Text=" P:" FontSize="8" Foreground="Gray" Margin="3,0,0,0"/>
-                                                                        <TextBlock Text="{Binding PC}" FontSize="8" Foreground="Gray"/>
-                                                                    </StackPanel>
+                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="8" 
+                                                                               Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="8" 
+                                                                               Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="8" 
+                                                                               Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
                                                                                FontSize="8" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                 </StackPanel>
@@ -534,11 +536,11 @@
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
                                                                             <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                            <Binding Path="Photo"/>
+                                                                            <Binding Path="ProductInfo.Photo"/>
                                                                         </MultiBinding>
                                                                     </Border.Visibility>
                                                                     <Grid>
-                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                        <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="No photo" 
                                                                                    FontSize="8" 
@@ -550,7 +552,7 @@
                                                                                 <Style TargetType="TextBlock">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                        <DataTrigger Binding="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
                                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
@@ -579,10 +581,12 @@
                                                                 <StackPanel Grid.Column="0">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="RSSI: " FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text="{Binding RSSI}" FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text=" | PC: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding PC}" FontSize="12" Foreground="Gray"/>
+                                                                        <TextBlock Text="Box: " FontSize="12" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="12" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="12" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="12" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="12" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="12" Foreground="Purple"/>
                                                                         <TextBlock Text=" | Время: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
                                                                         <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="12" Foreground="Gray"/>
                                                                     </StackPanel>
@@ -593,11 +597,11 @@
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
                                                                             <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                            <Binding Path="Photo"/>
+                                                                            <Binding Path="ProductInfo.Photo"/>
                                                                         </MultiBinding>
                                                                     </Border.Visibility>
                                                                     <Grid>
-                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                        <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="Photo not found" 
                                                                                    FontSize="10" 
@@ -609,7 +613,7 @@
                                                                                 <Style TargetType="TextBlock">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                        <DataTrigger Binding="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
                                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
@@ -770,12 +774,12 @@
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
                                                                                TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                                                                        <TextBlock Text="R:" FontSize="8" Foreground="Gray"/>
-                                                                        <TextBlock Text="{Binding RSSI}" FontSize="8" Foreground="Gray"/>
-                                                                        <TextBlock Text=" P:" FontSize="8" Foreground="Gray" Margin="3,0,0,0"/>
-                                                                        <TextBlock Text="{Binding PC}" FontSize="8" Foreground="Gray"/>
-                                                                    </StackPanel>
+                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="8" 
+                                                                               Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="8" 
+                                                                               Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="8" 
+                                                                               Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="Не найдено" 
                                                                                FontSize="8" Foreground="#E74C3C" FontWeight="Bold" 
                                                                                HorizontalAlignment="Center" Margin="0,1,0,0"/>
@@ -787,11 +791,11 @@
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
                                                                             <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                            <Binding Path="Photo"/>
+                                                                            <Binding Path="ProductInfo.Photo"/>
                                                                         </MultiBinding>
                                                                     </Border.Visibility>
                                                                     <Grid>
-                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                        <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="No photo" 
                                                                                    FontSize="8" 
@@ -803,7 +807,7 @@
                                                                                 <Style TargetType="TextBlock">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                        <DataTrigger Binding="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
                                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
@@ -832,10 +836,12 @@
                                                                 <StackPanel Grid.Column="0">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="RSSI: " FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text="{Binding RSSI}" FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text=" | PC: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding PC}" FontSize="12" Foreground="Gray"/>
+                                                                        <TextBlock Text="Box: " FontSize="12" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="12" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="12" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="12" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="12" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="12" Foreground="Purple"/>
                                                                         <TextBlock Text=" | Статус: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
                                                                         <TextBlock Text="Не найдено" FontSize="12" Foreground="#E74C3C" FontWeight="Bold"/>
                                                                     </StackPanel>
@@ -846,11 +852,11 @@
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
                                                                             <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                            <Binding Path="Photo"/>
+                                                                            <Binding Path="ProductInfo.Photo"/>
                                                                         </MultiBinding>
                                                                     </Border.Visibility>
                                                                     <Grid>
-                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                        <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="Photo not found" 
                                                                                    FontSize="10" 
@@ -862,7 +868,7 @@
                                                                                 <Style TargetType="TextBlock">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                        <DataTrigger Binding="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
                                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
@@ -1017,12 +1023,12 @@
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
                                                                                TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                                                                        <TextBlock Text="R:" FontSize="8" Foreground="Gray"/>
-                                                                        <TextBlock Text="{Binding RSSI}" FontSize="8" Foreground="Gray"/>
-                                                                        <TextBlock Text=" P:" FontSize="8" Foreground="Gray" Margin="3,0,0,0"/>
-                                                                        <TextBlock Text="{Binding PC}" FontSize="8" Foreground="Gray"/>
-                                                                    </StackPanel>
+                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="8" 
+                                                                               Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="8" 
+                                                                               Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="8" 
+                                                                               Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
                                                                                FontSize="8" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="Не ожидается" 
@@ -1036,11 +1042,11 @@
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
                                                                             <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                            <Binding Path="Photo"/>
+                                                                            <Binding Path="ProductInfo.Photo"/>
                                                                         </MultiBinding>
                                                                     </Border.Visibility>
                                                                     <Grid>
-                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                        <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="No photo" 
                                                                                    FontSize="8" 
@@ -1052,7 +1058,7 @@
                                                                                 <Style TargetType="TextBlock">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                        <DataTrigger Binding="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
                                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
@@ -1081,10 +1087,12 @@
                                                                 <StackPanel Grid.Column="0">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="RSSI: " FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text="{Binding RSSI}" FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text=" | PC: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding PC}" FontSize="12" Foreground="Gray"/>
+                                                                        <TextBlock Text="Box: " FontSize="12" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="12" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="12" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="12" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="12" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="12" Foreground="Purple"/>
                                                                         <TextBlock Text=" | Время: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
                                                                         <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="12" Foreground="Gray"/>
                                                                         <TextBlock Text=" | Статус: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
@@ -1097,11 +1105,11 @@
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
                                                                             <Binding Path="DataContext.ShowPhotos" RelativeSource="{RelativeSource AncestorType=ListView}"/>
-                                                                            <Binding Path="Photo"/>
+                                                                            <Binding Path="ProductInfo.Photo"/>
                                                                         </MultiBinding>
                                                                     </Border.Visibility>
                                                                     <Grid>
-                                                                        <Image Source="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" 
+                                                                        <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="Photo not found" 
                                                                                    FontSize="10" 
@@ -1113,7 +1121,7 @@
                                                                                 <Style TargetType="TextBlock">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
+                                                                                        <DataTrigger Binding="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" Value="{x:Null}">
                                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
