@@ -320,48 +320,88 @@
                                 <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
                                 <TextBlock Text="Вид:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
-                                              Width="60" Height="25" VerticalAlignment="Center" Margin="0,0,5,0"
-                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                    <ToggleButton.Style>
-                                        <Style TargetType="ToggleButton">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
+                                <Border CornerRadius="6" Margin="0,0,5,0">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#F8F9FA"/>
+                                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#D5DBDB"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
+                                                <DataTrigger Binding="{Binding IsGridView}" Value="True">
+                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
-                                <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
-                                              Width="60" Height="25" VerticalAlignment="Center"
-                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                    <ToggleButton.Style>
-                                        <Style TargetType="ToggleButton">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
+                                    </Border.Style>
+                                    <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
+                                                  Width="60" Height="25" VerticalAlignment="Center"
+                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Border>
+                                <Border CornerRadius="6">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#F8F9FA"/>
+                                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#D5DBDB"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
+                                                <DataTrigger Binding="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" Value="True">
+                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
+                                    </Border.Style>
+                                    <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
+                                                  Width="60" Height="25" VerticalAlignment="Center"
+                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Border>
                             </StackPanel>
                         </Border>
 
@@ -564,48 +604,88 @@
                                 <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
                                 <TextBlock Text="Вид:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
-                                              Width="60" Height="25" VerticalAlignment="Center" Margin="0,0,5,0"
-                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                    <ToggleButton.Style>
-                                        <Style TargetType="ToggleButton">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
+                                <Border CornerRadius="6" Margin="0,0,5,0">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#F8F9FA"/>
+                                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#D5DBDB"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
+                                                <DataTrigger Binding="{Binding IsGridView}" Value="True">
+                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
-                                <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
-                                              Width="60" Height="25" VerticalAlignment="Center"
-                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                    <ToggleButton.Style>
-                                        <Style TargetType="ToggleButton">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
+                                    </Border.Style>
+                                    <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
+                                                  Width="60" Height="25" VerticalAlignment="Center"
+                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Border>
+                                <Border CornerRadius="6">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#F8F9FA"/>
+                                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#D5DBDB"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
+                                                <DataTrigger Binding="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" Value="True">
+                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
+                                    </Border.Style>
+                                    <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
+                                                  Width="60" Height="25" VerticalAlignment="Center"
+                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Border>
                             </StackPanel>
                         </Border>
 
@@ -818,48 +898,88 @@
                                 <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
                                 <TextBlock Text="Вид:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
-                                              Width="60" Height="25" VerticalAlignment="Center" Margin="0,0,5,0"
-                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                    <ToggleButton.Style>
-                                        <Style TargetType="ToggleButton">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
+                                <Border CornerRadius="6" Margin="0,0,5,0">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#F8F9FA"/>
+                                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#D5DBDB"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
+                                                <DataTrigger Binding="{Binding IsGridView}" Value="True">
+                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
-                                <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
-                                              Width="60" Height="25" VerticalAlignment="Center"
-                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                    <ToggleButton.Style>
-                                        <Style TargetType="ToggleButton">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
+                                    </Border.Style>
+                                    <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
+                                                  Width="60" Height="25" VerticalAlignment="Center"
+                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Border>
+                                <Border CornerRadius="6">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#F8F9FA"/>
+                                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#D5DBDB"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
+                                                <DataTrigger Binding="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" Value="True">
+                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
+                                    </Border.Style>
+                                    <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
+                                                  Width="60" Height="25" VerticalAlignment="Center"
+                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Border>
                             </StackPanel>
                         </Border>
 
@@ -1067,48 +1187,88 @@
                                 <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
                                 <TextBlock Text="Вид:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
-                                              Width="60" Height="25" VerticalAlignment="Center" Margin="0,0,5,0"
-                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                    <ToggleButton.Style>
-                                        <Style TargetType="ToggleButton">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
+                                <Border CornerRadius="6" Margin="0,0,5,0">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#F8F9FA"/>
+                                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#D5DBDB"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
+                                                <DataTrigger Binding="{Binding IsGridView}" Value="True">
+                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
-                                <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
-                                              Width="60" Height="25" VerticalAlignment="Center"
-                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                    <ToggleButton.Style>
-                                        <Style TargetType="ToggleButton">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
+                                    </Border.Style>
+                                    <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
+                                                  Width="60" Height="25" VerticalAlignment="Center"
+                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Border>
+                                <Border CornerRadius="6">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#F8F9FA"/>
+                                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#D5DBDB"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Background" Value="#BDC3C7"/>
-                                                </Trigger>
+                                                <DataTrigger Binding="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" Value="True">
+                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
+                                    </Border.Style>
+                                    <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
+                                                  Width="60" Height="25" VerticalAlignment="Center"
+                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Border>
                             </StackPanel>
                         </Border>
 
