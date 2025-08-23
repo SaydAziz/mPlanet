@@ -30,13 +30,18 @@
                     <!-- Expected Button -->
                     <Border Grid.Column="0" 
                             CornerRadius="6"
-                            Margin="5"
-                            BorderThickness="1"
-                            BorderBrush="#E0E0E0"
-                            Background="#F8F9FA">
+                            Margin="5">
                         <Border.Style>
                             <Style TargetType="Border">
+                                <Setter Property="Background" Value="#F8F9FA"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="BorderThickness" Value="1"/>
                                 <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                    </DataTrigger>
                                     <DataTrigger Binding="{Binding IsPressed, ElementName=ExpectedButton}" Value="True">
                                         <Setter Property="RenderTransform">
                                             <Setter.Value>
@@ -73,13 +78,18 @@
                     <!-- Found Button -->
                     <Border Grid.Column="1" 
                             CornerRadius="6"
-                            Margin="5"
-                            BorderThickness="1"
-                            BorderBrush="#E0E0E0"
-                            Background="#F8F9FA">
+                            Margin="5">
                         <Border.Style>
                             <Style TargetType="Border">
+                                <Setter Property="Background" Value="#F8F9FA"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="BorderThickness" Value="1"/>
                                 <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                    </DataTrigger>
                                     <DataTrigger Binding="{Binding IsPressed, ElementName=FoundButton}" Value="True">
                                         <Setter Property="RenderTransform">
                                             <Setter.Value>
@@ -116,13 +126,18 @@
                     <!-- Missing Button -->
                     <Border Grid.Column="2" 
                             CornerRadius="6"
-                            Margin="5"
-                            BorderThickness="1"
-                            BorderBrush="#E0E0E0"
-                            Background="#F8F9FA">
+                            Margin="5">
                         <Border.Style>
                             <Style TargetType="Border">
+                                <Setter Property="Background" Value="#F8F9FA"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="BorderThickness" Value="1"/>
                                 <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                    </DataTrigger>
                                     <DataTrigger Binding="{Binding IsPressed, ElementName=MissingButton}" Value="True">
                                         <Setter Property="RenderTransform">
                                             <Setter.Value>
@@ -159,13 +174,18 @@
                     <!-- Extra Button -->
                     <Border Grid.Column="3" 
                             CornerRadius="6"
-                            Margin="5"
-                            BorderThickness="1"
-                            BorderBrush="#E0E0E0"
-                            Background="#F8F9FA">
+                            Margin="5">
                         <Border.Style>
                             <Style TargetType="Border">
+                                <Setter Property="Background" Value="#F8F9FA"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="BorderThickness" Value="1"/>
                                 <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                    </DataTrigger>
                                     <DataTrigger Binding="{Binding IsPressed, ElementName=ExtraButton}" Value="True">
                                         <Setter Property="RenderTransform">
                                             <Setter.Value>
