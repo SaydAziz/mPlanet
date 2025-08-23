@@ -335,14 +335,14 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
-                                                  Width="60" Height="25" VerticalAlignment="Center"
-                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton">
+                                    <CheckBox Content="Сетка" IsChecked="{Binding IsGridView}" 
+                                              Width="60" Height="25" VerticalAlignment="Center"
+                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="ToggleButton">
+                                                        <ControlTemplate TargetType="CheckBox">
                                                             <Border x:Name="border" Background="Transparent" CornerRadius="6">
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
@@ -353,13 +353,16 @@
                                                                 <Trigger Property="IsPressed" Value="True">
                                                                     <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
                                                                 </Trigger>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
+                                        </CheckBox.Style>
+                                    </CheckBox>
                                 </Border>
                                 <Border CornerRadius="6">
                                     <Border.Style>
@@ -376,14 +379,14 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
-                                                  Width="60" Height="25" VerticalAlignment="Center"
-                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton">
+                                    <CheckBox Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
+                                              Width="60" Height="25" VerticalAlignment="Center"
+                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="ToggleButton">
+                                                        <ControlTemplate TargetType="CheckBox">
                                                             <Border x:Name="border" Background="Transparent" CornerRadius="6">
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
@@ -394,13 +397,16 @@
                                                                 <Trigger Property="IsPressed" Value="True">
                                                                     <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
                                                                 </Trigger>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
+                                        </CheckBox.Style>
+                                    </CheckBox>
                                 </Border>
                             </StackPanel>
                         </Border>
@@ -619,14 +625,14 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
-                                                  Width="60" Height="25" VerticalAlignment="Center"
-                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton">
+                                    <CheckBox Content="Сетка" IsChecked="{Binding IsGridView}" 
+                                              Width="60" Height="25" VerticalAlignment="Center"
+                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="ToggleButton">
+                                                        <ControlTemplate TargetType="CheckBox">
                                                             <Border x:Name="border" Background="Transparent" CornerRadius="6">
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
@@ -637,13 +643,16 @@
                                                                 <Trigger Property="IsPressed" Value="True">
                                                                     <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
                                                                 </Trigger>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
+                                        </CheckBox.Style>
+                                    </CheckBox>
                                 </Border>
                                 <Border CornerRadius="6">
                                     <Border.Style>
@@ -660,14 +669,14 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
-                                                  Width="60" Height="25" VerticalAlignment="Center"
-                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton">
+                                    <CheckBox Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
+                                              Width="60" Height="25" VerticalAlignment="Center"
+                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="ToggleButton">
+                                                        <ControlTemplate TargetType="CheckBox">
                                                             <Border x:Name="border" Background="Transparent" CornerRadius="6">
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
@@ -678,13 +687,16 @@
                                                                 <Trigger Property="IsPressed" Value="True">
                                                                     <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
                                                                 </Trigger>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
+                                        </CheckBox.Style>
+                                    </CheckBox>
                                 </Border>
                             </StackPanel>
                         </Border>
@@ -913,14 +925,14 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
-                                                  Width="60" Height="25" VerticalAlignment="Center"
-                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton">
+                                    <CheckBox Content="Сетка" IsChecked="{Binding IsGridView}" 
+                                              Width="60" Height="25" VerticalAlignment="Center"
+                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="ToggleButton">
+                                                        <ControlTemplate TargetType="CheckBox">
                                                             <Border x:Name="border" Background="Transparent" CornerRadius="6">
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
@@ -931,13 +943,16 @@
                                                                 <Trigger Property="IsPressed" Value="True">
                                                                     <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
                                                                 </Trigger>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
+                                        </CheckBox.Style>
+                                    </CheckBox>
                                 </Border>
                                 <Border CornerRadius="6">
                                     <Border.Style>
@@ -954,14 +969,14 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
-                                                  Width="60" Height="25" VerticalAlignment="Center"
-                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton">
+                                    <CheckBox Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
+                                              Width="60" Height="25" VerticalAlignment="Center"
+                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="ToggleButton">
+                                                        <ControlTemplate TargetType="CheckBox">
                                                             <Border x:Name="border" Background="Transparent" CornerRadius="6">
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
@@ -972,13 +987,16 @@
                                                                 <Trigger Property="IsPressed" Value="True">
                                                                     <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
                                                                 </Trigger>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
+                                        </CheckBox.Style>
+                                    </CheckBox>
                                 </Border>
                             </StackPanel>
                         </Border>
@@ -1202,14 +1220,14 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <ToggleButton Content="Сетка" IsChecked="{Binding IsGridView}" 
-                                                  Width="60" Height="25" VerticalAlignment="Center"
-                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton">
+                                    <CheckBox Content="Сетка" IsChecked="{Binding IsGridView}" 
+                                              Width="60" Height="25" VerticalAlignment="Center"
+                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="ToggleButton">
+                                                        <ControlTemplate TargetType="CheckBox">
                                                             <Border x:Name="border" Background="Transparent" CornerRadius="6">
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
@@ -1220,13 +1238,16 @@
                                                                 <Trigger Property="IsPressed" Value="True">
                                                                     <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
                                                                 </Trigger>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
+                                        </CheckBox.Style>
+                                    </CheckBox>
                                 </Border>
                                 <Border CornerRadius="6">
                                     <Border.Style>
@@ -1243,14 +1264,14 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <ToggleButton Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
-                                                  Width="60" Height="25" VerticalAlignment="Center"
-                                                  Background="Transparent" BorderThickness="0" Cursor="Hand">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton">
+                                    <CheckBox Content="Список" IsChecked="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" 
+                                              Width="60" Height="25" VerticalAlignment="Center"
+                                              Background="Transparent" BorderThickness="0" Cursor="Hand">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="ToggleButton">
+                                                        <ControlTemplate TargetType="CheckBox">
                                                             <Border x:Name="border" Background="Transparent" CornerRadius="6">
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
@@ -1261,13 +1282,16 @@
                                                                 <Trigger Property="IsPressed" Value="True">
                                                                     <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
                                                                 </Trigger>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
+                                        </CheckBox.Style>
+                                    </CheckBox>
                                 </Border>
                             </StackPanel>
                         </Border>
