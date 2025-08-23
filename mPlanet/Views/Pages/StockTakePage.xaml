@@ -252,7 +252,7 @@
                                             <Setter Property="ItemTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
-                                                        <Border Width="140" Height="160" Margin="5" 
+                                                        <Border Width="238" Height="288" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
                                                                 CornerRadius="3">
                                                             <Border.Style>
@@ -274,13 +274,13 @@
                                                                 
                                                                 <!-- Tag Information at top -->
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
                                                                                TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" 
                                                                                Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" 
                                                                                Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
                                                                                Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                 </StackPanel>
                                                                 
@@ -297,7 +297,7 @@
                                                                         <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="No photo" 
-                                                                                   FontSize="8" 
+                                                                                   FontSize="14" 
                                                                                    Foreground="Gray" 
                                                                                    HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Center"
@@ -344,7 +344,7 @@
                                                                         <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="Photo not found" 
-                                                                                   FontSize="10" 
+                                                                                   FontSize="14" 
                                                                                    Foreground="Gray" 
                                                                                    HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Center"
@@ -366,12 +366,12 @@
                                                                 <StackPanel Grid.Column="1">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="12" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="12" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="12" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="12" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="12" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="12" Foreground="Purple"/>
+                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                             </Grid>
@@ -496,7 +496,7 @@
                                             <Setter Property="ItemTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
-                                                        <Border Width="140" Height="170" Margin="5" 
+                                                        <Border Width="238" Height="302" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
                                                                 CornerRadius="3">
                                                             <Border.Style>
@@ -518,16 +518,16 @@
                                                                 
                                                                 <!-- Tag Information at top -->
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
                                                                                TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" 
                                                                                Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" 
                                                                                Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
                                                                                Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
-                                                                               FontSize="8" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                               FontSize="14" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                 </StackPanel>
                                                                 
                                                                 <!-- Photo at bottom -->
@@ -543,7 +543,7 @@
                                                                         <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="No photo" 
-                                                                                   FontSize="8" 
+                                                                                   FontSize="14" 
                                                                                    Foreground="Gray" 
                                                                                    HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Center"
@@ -581,14 +581,14 @@
                                                                 <StackPanel Grid.Column="0">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="12" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="12" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="12" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="12" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="12" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="12" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Время: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="12" Foreground="Gray"/>
+                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
+                                                                        <TextBlock Text=" | Время: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="14" Foreground="Gray"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                                 
@@ -604,7 +604,7 @@
                                                                         <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="Photo not found" 
-                                                                                   FontSize="10" 
+                                                                                   FontSize="14" 
                                                                                    Foreground="Gray" 
                                                                                    HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Center"
@@ -750,7 +750,7 @@
                                             <Setter Property="ItemTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
-                                                        <Border Width="140" Height="175" Margin="5" 
+                                                        <Border Width="238" Height="310" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
                                                                 CornerRadius="3">
                                                             <Border.Style>
@@ -772,16 +772,16 @@
                                                                 
                                                                 <!-- Tag Information at top -->
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
                                                                                TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" 
                                                                                Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" 
                                                                                Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
                                                                                Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="Не найдено" 
-                                                                               FontSize="8" Foreground="#E74C3C" FontWeight="Bold" 
+                                                                               FontSize="14" Foreground="#E74C3C" FontWeight="Bold" 
                                                                                HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                 </StackPanel>
                                                                 
@@ -798,7 +798,7 @@
                                                                         <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="No photo" 
-                                                                                   FontSize="8" 
+                                                                                   FontSize="14" 
                                                                                    Foreground="Gray" 
                                                                                    HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Center"
@@ -836,14 +836,14 @@
                                                                 <StackPanel Grid.Column="0">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="12" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="12" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="12" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="12" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="12" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="12" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Статус: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="Не найдено" FontSize="12" Foreground="#E74C3C" FontWeight="Bold"/>
+                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
+                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="Не найдено" FontSize="14" Foreground="#E74C3C" FontWeight="Bold"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                                 
@@ -859,7 +859,7 @@
                                                                         <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="Photo not found" 
-                                                                                   FontSize="10" 
+                                                                                   FontSize="14" 
                                                                                    Foreground="Gray" 
                                                                                    HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Center"
@@ -999,7 +999,7 @@
                                             <Setter Property="ItemTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
-                                                        <Border Width="140" Height="185" Margin="5" 
+                                                        <Border Width="238" Height="324" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
                                                                 CornerRadius="3">
                                                             <Border.Style>
@@ -1021,18 +1021,18 @@
                                                                 
                                                                 <!-- Tag Information at top -->
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="9" 
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
                                                                                TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" 
                                                                                Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" 
                                                                                Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="8" 
+                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
                                                                                Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
-                                                                               FontSize="8" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                               FontSize="14" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="Не ожидается" 
-                                                                               FontSize="8" Foreground="#F39C12" FontWeight="Bold" 
+                                                                               FontSize="14" Foreground="#F39C12" FontWeight="Bold" 
                                                                                HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                 </StackPanel>
                                                                 
@@ -1049,7 +1049,7 @@
                                                                         <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="No photo" 
-                                                                                   FontSize="8" 
+                                                                                   FontSize="14" 
                                                                                    Foreground="Gray" 
                                                                                    HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Center"
@@ -1087,16 +1087,16 @@
                                                                 <StackPanel Grid.Column="0">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="12" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="12" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="12" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="12" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="12" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="12" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Время: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="12" Foreground="Gray"/>
-                                                                        <TextBlock Text=" | Статус: " FontSize="12" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="Не ожидается" FontSize="12" Foreground="#F39C12" FontWeight="Bold"/>
+                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
+                                                                        <TextBlock Text=" | Время: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="14" Foreground="Gray"/>
+                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="Не ожидается" FontSize="14" Foreground="#F39C12" FontWeight="Bold"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                                 
@@ -1112,7 +1112,7 @@
                                                                         <Image Source="{Binding ProductInfo.Photo, Converter={StaticResource PhotoSourceConverter}}" 
                                                                                Stretch="UniformToFill"/>
                                                                         <TextBlock Text="Photo not found" 
-                                                                                   FontSize="10" 
+                                                                                   FontSize="14" 
                                                                                    Foreground="Gray" 
                                                                                    HorizontalAlignment="Center" 
                                                                                    VerticalAlignment="Center"
