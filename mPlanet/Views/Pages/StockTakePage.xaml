@@ -327,11 +327,50 @@
                                             <Setter Property="BorderBrush" Value="#E0E0E0"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsGridView}" Value="True">
-                                                    <Setter Property="Background" Value="#E3F2FD"/>
-                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Expected"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Found"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Missing"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Extra"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
@@ -360,6 +399,96 @@
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E8F5E8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#C8E6C9"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDEDEC"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FADBD8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FEF9E7"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDF2C0"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                             </Style>
                                         </CheckBox.Style>
                                     </CheckBox>
@@ -371,11 +500,50 @@
                                             <Setter Property="BorderBrush" Value="#E0E0E0"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" Value="True">
-                                                    <Setter Property="Background" Value="#E3F2FD"/>
-                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Expected"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Found"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Missing"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Extra"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
@@ -404,6 +572,96 @@
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E8F5E8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#C8E6C9"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDEDEC"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FADBD8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FEF9E7"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDF2C0"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                             </Style>
                                         </CheckBox.Style>
                                     </CheckBox>
@@ -617,11 +875,50 @@
                                             <Setter Property="BorderBrush" Value="#E0E0E0"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsGridView}" Value="True">
-                                                    <Setter Property="Background" Value="#E3F2FD"/>
-                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Expected"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Found"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Missing"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Extra"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
@@ -650,6 +947,96 @@
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E8F5E8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#C8E6C9"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDEDEC"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FADBD8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FEF9E7"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDF2C0"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                             </Style>
                                         </CheckBox.Style>
                                     </CheckBox>
@@ -661,11 +1048,50 @@
                                             <Setter Property="BorderBrush" Value="#E0E0E0"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" Value="True">
-                                                    <Setter Property="Background" Value="#E3F2FD"/>
-                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Expected"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Found"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Missing"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Extra"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
@@ -694,6 +1120,96 @@
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E8F5E8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#C8E6C9"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDEDEC"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FADBD8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FEF9E7"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDF2C0"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                             </Style>
                                         </CheckBox.Style>
                                     </CheckBox>
@@ -917,11 +1433,50 @@
                                             <Setter Property="BorderBrush" Value="#E0E0E0"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsGridView}" Value="True">
-                                                    <Setter Property="Background" Value="#E3F2FD"/>
-                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Expected"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Found"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Missing"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Extra"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
@@ -950,6 +1505,96 @@
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E8F5E8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#C8E6C9"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDEDEC"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FADBD8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FEF9E7"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDF2C0"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                             </Style>
                                         </CheckBox.Style>
                                     </CheckBox>
@@ -961,11 +1606,50 @@
                                             <Setter Property="BorderBrush" Value="#E0E0E0"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" Value="True">
-                                                    <Setter Property="Background" Value="#E3F2FD"/>
-                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Expected"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Found"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Missing"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Extra"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
@@ -994,6 +1678,96 @@
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E8F5E8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#C8E6C9"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDEDEC"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FADBD8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FEF9E7"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDF2C0"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                             </Style>
                                         </CheckBox.Style>
                                     </CheckBox>
@@ -1212,11 +1986,50 @@
                                             <Setter Property="BorderBrush" Value="#E0E0E0"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsGridView}" Value="True">
-                                                    <Setter Property="Background" Value="#E3F2FD"/>
-                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Expected"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Found"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Missing"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="True"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Extra"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
@@ -1245,6 +2058,96 @@
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E8F5E8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#C8E6C9"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDEDEC"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FADBD8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FEF9E7"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDF2C0"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                             </Style>
                                         </CheckBox.Style>
                                     </CheckBox>
@@ -1256,11 +2159,50 @@
                                             <Setter Property="BorderBrush" Value="#E0E0E0"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" Value="True">
-                                                    <Setter Property="Background" Value="#E3F2FD"/>
-                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Expected"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E3F2FD"/>
+                                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Found"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#E8F5E8"/>
+                                                        <Setter Property="BorderBrush" Value="#27AE60"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Missing"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FDEDEC"/>
+                                                        <Setter Property="BorderBrush" Value="#E74C3C"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsGridView}" Value="False"/>
+                                                        <Condition Binding="{Binding CurrentView}" Value="Extra"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Background" Value="#FEF9E7"/>
+                                                        <Setter Property="BorderBrush" Value="#F39C12"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
@@ -1289,6 +2231,96 @@
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E3F2FD"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#BBDEFB"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#E8F5E8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#C8E6C9"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDEDEC"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FADBD8"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="CheckBox">
+                                                                    <Border x:Name="border" Background="Transparent" CornerRadius="6">
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FEF9E7"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                            <Setter TargetName="border" Property="Background" Value="#FDF2C0"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                             </Style>
                                         </CheckBox.Style>
                                     </CheckBox>
