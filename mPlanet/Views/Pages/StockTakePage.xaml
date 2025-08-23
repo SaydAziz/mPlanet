@@ -28,116 +28,176 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Expected Button -->
-                    <Button Grid.Column="0" 
-                            Command="{Binding ShowExpectedCommand}"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Padding="10,5"
-                            Cursor="Hand">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderThickness" Value="0"/>
+                    <Border Grid.Column="0" 
+                            CornerRadius="6"
+                            Margin="5"
+                            BorderThickness="1"
+                            BorderBrush="#E0E0E0"
+                            Background="#F8F9FA">
+                        <Border.Style>
+                            <Style TargetType="Border">
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#D5DBDB"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#BDC3C7"/>
-                                    </Trigger>
+                                    <DataTrigger Binding="{Binding IsPressed, ElementName=ExpectedButton}" Value="True">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Button.Style>
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="Ожидается" FontWeight="Bold" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding ExpectedCount}" FontSize="24" FontWeight="Bold" 
-                                       Foreground="#3498DB" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
+                        </Border.Style>
+                        <Button x:Name="ExpectedButton"
+                                Height="65"
+                                Background="Transparent"
+                                BorderThickness="0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Command" Value="{Binding ShowExpectedCommand}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding CurrentView}" Value="Expected">
+                                            <Setter Property="Command" Value="{x:Null}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Ожидается" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding ExpectedCount}" FontSize="24" FontWeight="Bold" 
+                                           Foreground="#3498DB" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
 
                     <!-- Found Button -->
-                    <Button Grid.Column="1" 
-                            Command="{Binding ShowFoundCommand}"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Padding="10,5"
-                            Cursor="Hand">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderThickness" Value="0"/>
+                    <Border Grid.Column="1" 
+                            CornerRadius="6"
+                            Margin="5"
+                            BorderThickness="1"
+                            BorderBrush="#E0E0E0"
+                            Background="#F8F9FA">
+                        <Border.Style>
+                            <Style TargetType="Border">
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#D5DBDB"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#BDC3C7"/>
-                                    </Trigger>
+                                    <DataTrigger Binding="{Binding IsPressed, ElementName=FoundButton}" Value="True">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Button.Style>
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="Найдено" FontWeight="Bold" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding FoundCount}" FontSize="24" FontWeight="Bold" 
-                                       Foreground="#27AE60" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
+                        </Border.Style>
+                        <Button x:Name="FoundButton"
+                                Height="65"
+                                Background="Transparent"
+                                BorderThickness="0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Command" Value="{Binding ShowFoundCommand}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding CurrentView}" Value="Found">
+                                            <Setter Property="Command" Value="{x:Null}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Найдено" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding FoundCount}" FontSize="24" FontWeight="Bold" 
+                                           Foreground="#27AE60" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
 
                     <!-- Missing Button -->
-                    <Button Grid.Column="2" 
-                            Command="{Binding ShowMissingCommand}"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Padding="10,5"
-                            Cursor="Hand">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderThickness" Value="0"/>
+                    <Border Grid.Column="2" 
+                            CornerRadius="6"
+                            Margin="5"
+                            BorderThickness="1"
+                            BorderBrush="#E0E0E0"
+                            Background="#F8F9FA">
+                        <Border.Style>
+                            <Style TargetType="Border">
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#D5DBDB"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#BDC3C7"/>
-                                    </Trigger>
+                                    <DataTrigger Binding="{Binding IsPressed, ElementName=MissingButton}" Value="True">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Button.Style>
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="Недостает" FontWeight="Bold" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding MissingCount}" FontSize="24" FontWeight="Bold" 
-                                       Foreground="#E74C3C" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
+                        </Border.Style>
+                        <Button x:Name="MissingButton"
+                                Height="65"
+                                Background="Transparent"
+                                BorderThickness="0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Command" Value="{Binding ShowMissingCommand}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding CurrentView}" Value="Missing">
+                                            <Setter Property="Command" Value="{x:Null}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Недостает" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding MissingCount}" FontSize="24" FontWeight="Bold" 
+                                           Foreground="#E74C3C" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
 
                     <!-- Extra Button -->
-                    <Button Grid.Column="3" 
-                            Command="{Binding ShowExtraCommand}"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Padding="10,5"
-                            Cursor="Hand">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderThickness" Value="0"/>
+                    <Border Grid.Column="3" 
+                            CornerRadius="6"
+                            Margin="5"
+                            BorderThickness="1"
+                            BorderBrush="#E0E0E0"
+                            Background="#F8F9FA">
+                        <Border.Style>
+                            <Style TargetType="Border">
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#D5DBDB"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#BDC3C7"/>
-                                    </Trigger>
+                                    <DataTrigger Binding="{Binding IsPressed, ElementName=ExtraButton}" Value="True">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Button.Style>
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="Лишних" FontWeight="Bold" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding ExtraTags.Count}" FontSize="24" FontWeight="Bold" 
-                                       Foreground="#F39C12" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
+                        </Border.Style>
+                        <Button x:Name="ExtraButton"
+                                Height="65"
+                                Background="Transparent"
+                                BorderThickness="0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Command" Value="{Binding ShowExtraCommand}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding CurrentView}" Value="Extra">
+                                            <Setter Property="Command" Value="{x:Null}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Лишних" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding ExtraTags.Count}" FontSize="24" FontWeight="Bold" 
+                                           Foreground="#F39C12" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
                 </Grid>
             </Border>
 
@@ -167,7 +227,7 @@
                                    Foreground="#3498db" Margin="15,10,15,5"/>
 
                         <!-- Settings Panel for Expected View -->
-                        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="3" Margin="10,5,10,10">
+                        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Margin="10,5,10,10">
                             <StackPanel Orientation="Horizontal" Margin="10,8">
                                 <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
@@ -254,7 +314,7 @@
                                                     <DataTemplate>
                                                         <Border Width="238" Height="288" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
-                                                                CornerRadius="3">
+                                                                CornerRadius="6">
                                                             <Border.Style>
                                                                 <Style TargetType="Border">
                                                                     <Style.Triggers>
@@ -411,7 +471,7 @@
                                    Foreground="#27AE60" Margin="15,10,15,5"/>
 
                         <!-- Settings Panel for Found View -->
-                        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="3" Margin="10,5,10,10">
+                        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Margin="10,5,10,10">
                             <StackPanel Orientation="Horizontal" Margin="10,8">
                                 <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
@@ -498,7 +558,7 @@
                                                     <DataTemplate>
                                                         <Border Width="238" Height="302" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
-                                                                CornerRadius="3">
+                                                                CornerRadius="6">
                                                             <Border.Style>
                                                                 <Style TargetType="Border">
                                                                     <Style.Triggers>
@@ -665,7 +725,7 @@
                                    Foreground="#E74C3C" Margin="15,10,15,5"/>
 
                         <!-- Settings Panel for Missing View -->
-                        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="3" Margin="10,5,10,10">
+                        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Margin="10,5,10,10">
                             <StackPanel Orientation="Horizontal" Margin="10,8">
                                 <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
@@ -752,7 +812,7 @@
                                                     <DataTemplate>
                                                         <Border Width="238" Height="310" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
-                                                                CornerRadius="3">
+                                                                CornerRadius="6">
                                                             <Border.Style>
                                                                 <Style TargetType="Border">
                                                                     <Style.Triggers>
@@ -914,7 +974,7 @@
                                    Foreground="#F39C12" Margin="15,10,15,5"/>
 
                         <!-- Settings Panel for Extra View -->
-                        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="3" Margin="10,5,10,10">
+                        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Margin="10,5,10,10">
                             <StackPanel Orientation="Horizontal" Margin="10,8">
                                 <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
@@ -1001,7 +1061,7 @@
                                                     <DataTemplate>
                                                         <Border Width="238" Height="324" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
-                                                                CornerRadius="3">
+                                                                CornerRadius="6">
                                                             <Border.Style>
                                                                 <Style TargetType="Border">
                                                                     <Style.Triggers>
