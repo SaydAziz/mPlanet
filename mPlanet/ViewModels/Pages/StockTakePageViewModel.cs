@@ -117,6 +117,7 @@ namespace mPlanet.ViewModels.Pages
         public ICommand DisconnectCommand { get; }
         public ICommand LoadExpectedStockCommand { get; }
         public ICommand AddTestExpectedDataCommand { get; }
+        public ICommand AddTestScannedDataCommand { get; }
         public ICommand ScanCommand { get; }
         public ICommand CompareStockCommand { get; }
         public ICommand ExportResultsCommand { get; }
@@ -135,6 +136,7 @@ namespace mPlanet.ViewModels.Pages
             DisconnectCommand = new RelayCommand(_ => DisconnectFromScanner(), _ => IsConnected);
             LoadExpectedStockCommand = new RelayCommand(_ => LoadExpectedStock());
             AddTestExpectedDataCommand = new RelayCommand(_ => AddTestExpectedData());
+            AddTestScannedDataCommand = new RelayCommand(_ => AddTestScannedData());
             ScanCommand = new RelayCommand(_ => PerformScan(), _ => IsConnected);
             CompareStockCommand = new RelayCommand(_ => CompareStock());
             ExportResultsCommand = new RelayCommand(_ => ExportResults());
@@ -221,6 +223,37 @@ namespace mPlanet.ViewModels.Pages
             _navigationService.UpdateStatusMessage($"Добавлено {ExpectedCount} тестовых ожидаемых меток");
         }
 
+        private void AddTestScannedData()
+        {
+            ScannedTags.Clear();
+            
+            // Simulate scanning some of the expected items (first 3)
+            string[] epcCodes = { "001667", "001669", "001621" };
+            string[] jewelryTypes = { "Ring", "Necklace", "Earrings" };
+            
+            for (int i = 0; i < 3; i++)
+            {
+                var jewelryInfo = new JewelryProductInfo(
+                    productId: $"KV00{201 + i:D3}P-5W-D{i + 1:D2}", 
+                    boxNumber: $"BOX{i/2 + 1:D2}", 
+                    jewelryType: jewelryTypes[i],
+                    photo: $"Assets/TestImages/{jewelryTypes[i].ToLower()}_{i + 1:D3}.jpg"
+                );
+                
+                ScannedTags.Add(new TagInfo($"PC{i + 1:D4}", epcCodes[i], "-45", jewelryInfo));
+            }
+            
+            // Add one extra item not in expected list
+            var extraJewelryInfo = new JewelryProductInfo(
+                productId: "KV00999P-5W-D99", 
+                boxNumber: "BOX99", 
+                jewelryType: "Watch",
+                photo: "Assets/TestImages/watch_999.jpg"
+            );
+            
+            ScannedTags.Add(new TagInfo("PC9999", "999999", "-50", extraJewelryInfo));
+        }
+
         private async void PerformScan()
         {
             try
@@ -251,12 +284,17 @@ namespace mPlanet.ViewModels.Pages
             ExtraTags.Clear();
             FoundTags.Clear();
 
-            // Find missing tags (expected but not scanned)
+            // Update status for all expected tags
             foreach (var expectedTag in ExpectedTags)
             {
                 if (!ScannedTags.Any(s => s.EPC.Equals(expectedTag.EPC, StringComparison.OrdinalIgnoreCase)))
                 {
+                    expectedTag.Status = "MISSING";
                     MissingTags.Add(expectedTag);
+                }
+                else
+                {
+                    expectedTag.Status = "FOUND";
                 }
             }
 
@@ -265,11 +303,13 @@ namespace mPlanet.ViewModels.Pages
             {
                 if (!ExpectedTags.Any(e => e.EPC.Equals(scannedTag.EPC, StringComparison.OrdinalIgnoreCase)))
                 {
+                    scannedTag.Status = "EXTRA";
                     ExtraTags.Add(scannedTag);
                 }
                 else
                 {
                     // This is a found tag (scanned and expected)
+                    scannedTag.Status = "FOUND";
                     FoundTags.Add(scannedTag);
                 }
             }

@@ -766,8 +766,8 @@
                                                                         </StackPanel>
                                                                     </Grid>
                                                                     <Border HorizontalAlignment="Left" Width="150" Margin="20,8,0,0">
-                                                                        <TextBlock Text="Ожидается" 
-                                                                                   FontSize="15" Foreground="#3498DB" FontWeight="Bold" 
+                                                                        <TextBlock Text="{Binding Status}" 
+                                                                                   FontSize="15" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold" 
                                                                                    HorizontalAlignment="Center"/>
                                                                     </Border>
                                                                 </StackPanel>
@@ -2728,6 +2728,10 @@
 
                         <Button Content="Тестовые данные" 
                                 Command="{Binding AddTestExpectedDataCommand}"
+                                Height="35" Margin="0,0,0,10"/>
+                        
+                        <Button Content="Тестовое сканирование" 
+                                Command="{Binding AddTestScannedDataCommand}"
                                 Height="35"/>
                     </StackPanel>
                 </GroupBox>
