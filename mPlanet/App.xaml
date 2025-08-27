@@ -10,6 +10,7 @@
         <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
         <converters:PhotoVisibilityConverter x:Key="PhotoVisibilityConverter"/>
         <converters:PhotoSourceConverter x:Key="PhotoSourceConverter"/>
+        <converters:ItemIndexConverter x:Key="ItemIndexConverter"/>
         
         <!-- Custom Button Style with rounded corners and hover effects -->
         <!-- This style will be applied to ALL buttons in the application -->

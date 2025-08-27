@@ -724,6 +724,15 @@
                                                                     <RowDefinition Height="*"/>
                                                                 </Grid.RowDefinitions>
                                                                 
+                                                                <!-- Incremental number in top-left corner -->
+                                                                <Border Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                                        Background="#3498DB" CornerRadius="6,0,6,0" Width="24" Height="24" 
+                                                                        Margin="-5,-5,0,0" Panel.ZIndex="1000">
+                                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
+                                                                               Foreground="White" FontSize="12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                
                                                                 <!-- Tag Information at top -->
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
@@ -781,10 +790,19 @@
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="Auto"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 
-                                                                <Border Grid.Column="0" Width="80" Height="60" Margin="0,0,10,0"
+                                                                <!-- Incremental number in top-left corner -->
+                                                                <Border Grid.Column="0" Background="#3498DB" CornerRadius="12" Width="24" Height="24" 
+                                                                        Margin="0,0,10,0" VerticalAlignment="Top">
+                                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
+                                                                               Foreground="White" FontSize="12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                
+                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="0,0,10,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -815,7 +833,7 @@
                                                                     </Grid>
                                                                 </Border>
                                                                 
-                                                                <StackPanel Grid.Column="1">
+                                                                <StackPanel Grid.Column="2">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
                                                                         <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
@@ -1271,6 +1289,15 @@
                                                                     <RowDefinition Height="Auto"/>
                                                                     <RowDefinition Height="*"/>
                                                                 </Grid.RowDefinitions>
+                                                                
+                                                                <!-- Incremental number in top-left corner -->
+                                                                <Border Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                                        Background="#27AE60" CornerRadius="6,0,6,0" Width="24" Height="24" 
+                                                                        Margin="-5,-5,0,0" Panel.ZIndex="1000">
+                                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
+                                                                               Foreground="White" FontSize="12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
                                                                 
                                                                 <!-- Tag Information at top -->
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
@@ -1830,6 +1857,15 @@
                                                                     <RowDefinition Height="*"/>
                                                                 </Grid.RowDefinitions>
                                                                 
+                                                                <!-- Incremental number in top-left corner -->
+                                                                <Border Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                                        Background="#E74C3C" CornerRadius="6,0,6,0" Width="24" Height="24" 
+                                                                        Margin="-5,-5,0,0" Panel.ZIndex="1000">
+                                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
+                                                                               Foreground="White" FontSize="12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                
                                                                 <!-- Tag Information at top -->
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
@@ -1889,11 +1925,20 @@
                                                         <Border BorderBrush="#BDC3C7" BorderThickness="0,0,0,1" Padding="10,5">
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="Auto"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 
-                                                                <StackPanel Grid.Column="0">
+                                                                <!-- Incremental number in top-left corner -->
+                                                                <Border Grid.Column="0" Background="#E74C3C" CornerRadius="12" Width="24" Height="24" 
+                                                                        Margin="0,0,10,0" VerticalAlignment="Top">
+                                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
+                                                                               Foreground="White" FontSize="12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                
+                                                                <StackPanel Grid.Column="1">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
                                                                         <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
@@ -1907,7 +1952,7 @@
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                                 
-                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="10,0,0,0"
+                                                                <Border Grid.Column="2" Width="80" Height="60" Margin="10,0,0,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -2383,6 +2428,15 @@
                                                                     <RowDefinition Height="*"/>
                                                                 </Grid.RowDefinitions>
                                                                 
+                                                                <!-- Incremental number in top-left corner -->
+                                                                <Border Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                                        Background="#F39C12" CornerRadius="6,0,6,0" Width="24" Height="24" 
+                                                                        Margin="-5,-5,0,0" Panel.ZIndex="1000">
+                                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
+                                                                               Foreground="White" FontSize="12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                
                                                                 <!-- Tag Information at top -->
                                                                 <StackPanel Grid.Row="0" Margin="0,0,0,5">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
@@ -2444,11 +2498,20 @@
                                                         <Border BorderBrush="#BDC3C7" BorderThickness="0,0,0,1" Padding="10,5">
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="Auto"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 
-                                                                <StackPanel Grid.Column="0">
+                                                                <!-- Incremental number in top-left corner -->
+                                                                <Border Grid.Column="0" Background="#F39C12" CornerRadius="12" Width="24" Height="24" 
+                                                                        Margin="0,0,10,0" VerticalAlignment="Top">
+                                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
+                                                                               Foreground="White" FontSize="12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                
+                                                                <StackPanel Grid.Column="1">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
                                                                         <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
@@ -2464,7 +2527,7 @@
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                                 
-                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="10,0,0,0"
+                                                                <Border Grid.Column="2" Width="80" Height="60" Margin="10,0,0,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">

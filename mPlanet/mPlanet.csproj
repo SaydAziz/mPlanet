@@ -89,6 +89,7 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\ItemIndexConverter.cs" />
     <Compile Include="Converters\PhotoVisibilityConverter.cs" />
     <Compile Include="Converters\PhotoSourceConverter.cs" />
     <Compile Include="Services\ExportJsonService.cs" />
