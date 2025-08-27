@@ -704,7 +704,7 @@
                                             <Setter Property="ItemTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
-                                                        <Border Width="238" Height="288" Margin="5" 
+                                                        <Border Width="238" Height="324" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
                                                                 CornerRadius="6">
                                                             <Border.Style>
@@ -743,6 +743,9 @@
                                                                                Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                     <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
                                                                                Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                    <TextBlock Text="Ожидается" 
+                                                                               FontSize="14" Foreground="#3498DB" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" Margin="0,1,0,0"/>
                                                                 </StackPanel>
                                                                 
                                                                 <!-- Photo at bottom -->
@@ -796,7 +799,7 @@
                                                                 
                                                                 <!-- Incremental number in top-left corner -->
                                                                 <Border Grid.Column="0" Background="#3498DB" CornerRadius="12" Width="24" Height="24" 
-                                                                        Margin="0,0,10,0" VerticalAlignment="Top">
+                                                                        Margin="0,0,10,0" VerticalAlignment="Center">
                                                                     <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
                                                                                Foreground="White" FontSize="12" FontWeight="Bold" 
                                                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -842,6 +845,8 @@
                                                                         <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
                                                                         <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
                                                                         <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
+                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="Ожидается" FontSize="14" Foreground="Gray"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                             </Grid>
@@ -1270,7 +1275,7 @@
                                             <Setter Property="ItemTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
-                                                        <Border Width="238" Height="302" Margin="5" 
+                                                        <Border Width="238" Height="324" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
                                                                 CornerRadius="6">
                                                             <Border.Style>
@@ -1357,11 +1362,20 @@
                                                         <Border BorderBrush="#BDC3C7" BorderThickness="0,0,0,1" Padding="10,5">
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="Auto"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 
-                                                                <StackPanel Grid.Column="0">
+                                                                <!-- Incremental number in top-left corner -->
+                                                                <Border Grid.Column="0" Background="#27AE60" CornerRadius="12" Width="24" Height="24" 
+                                                                        Margin="0,0,10,0" VerticalAlignment="Center">
+                                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
+                                                                               Foreground="White" FontSize="12" FontWeight="Bold" 
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                
+                                                                <StackPanel Grid.Column="1">
                                                                     <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
                                                                         <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
@@ -1375,7 +1389,7 @@
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                                 
-                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="10,0,0,0"
+                                                                <Border Grid.Column="2" Width="80" Height="60" Margin="10,0,0,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -1837,7 +1851,7 @@
                                             <Setter Property="ItemTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
-                                                        <Border Width="238" Height="310" Margin="5" 
+                                                        <Border Width="238" Height="324" Margin="5" 
                                                                 Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
                                                                 CornerRadius="6">
                                                             <Border.Style>
@@ -1932,27 +1946,13 @@
                                                                 
                                                                 <!-- Incremental number in top-left corner -->
                                                                 <Border Grid.Column="0" Background="#E74C3C" CornerRadius="12" Width="24" Height="24" 
-                                                                        Margin="0,0,10,0" VerticalAlignment="Top">
+                                                                        Margin="0,0,10,0" VerticalAlignment="Center">
                                                                     <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
                                                                                Foreground="White" FontSize="12" FontWeight="Bold" 
                                                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                                 </Border>
                                                                 
-                                                                <StackPanel Grid.Column="1">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
-                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="Не найдено" FontSize="14" Foreground="#E74C3C" FontWeight="Bold"/>
-                                                                    </StackPanel>
-                                                                </StackPanel>
-                                                                
-                                                                <Border Grid.Column="2" Width="80" Height="60" Margin="10,0,0,0"
+                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="0,0,10,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -1982,6 +1982,20 @@
                                                                         </TextBlock>
                                                                     </Grid>
                                                                 </Border>
+                                                                
+                                                                <StackPanel Grid.Column="2">
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
+                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
+                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="Не найдено" FontSize="14" Foreground="#E74C3C" FontWeight="Bold"/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
                                                             </Grid>
                                                         </Border>
                                                     </DataTemplate>
@@ -2505,29 +2519,13 @@
                                                                 
                                                                 <!-- Incremental number in top-left corner -->
                                                                 <Border Grid.Column="0" Background="#F39C12" CornerRadius="12" Width="24" Height="24" 
-                                                                        Margin="0,0,10,0" VerticalAlignment="Top">
+                                                                        Margin="0,0,10,0" VerticalAlignment="Center">
                                                                     <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Converter={StaticResource ItemIndexConverter}}" 
                                                                                Foreground="White" FontSize="12" FontWeight="Bold" 
                                                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                                 </Border>
                                                                 
-                                                                <StackPanel Grid.Column="1">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
-                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Время: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="14" Foreground="Gray"/>
-                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="Не ожидается" FontSize="14" Foreground="#F39C12" FontWeight="Bold"/>
-                                                                    </StackPanel>
-                                                                </StackPanel>
-                                                                
-                                                                <Border Grid.Column="2" Width="80" Height="60" Margin="10,0,0,0"
+                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="0,0,10,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -2557,6 +2555,22 @@
                                                                         </TextBlock>
                                                                     </Grid>
                                                                 </Border>
+                                                                
+                                                                <StackPanel Grid.Column="2">
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
+                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
+                                                                        <TextBlock Text=" | Время: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="14" Foreground="Gray"/>
+                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="Не ожидается" FontSize="14" Foreground="#F39C12" FontWeight="Bold"/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
                                                             </Grid>
                                                         </Border>
                                                     </DataTemplate>
