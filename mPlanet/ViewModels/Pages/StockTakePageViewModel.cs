@@ -206,7 +206,7 @@ namespace mPlanet.ViewModels.Pages
                 string imagePath = $"Assets/TestImages/{jewelryType.ToLower()}_{i:D3}.jpg";
                 
                 var jewelryInfo = new JewelryProductInfo(
-                    productId: $"JW{i:D4}", 
+                    productId: $"KV00{200 + i:D3}P-5W-D{i:D2}", 
                     boxNumber: $"BOX{(i-1)/2 + 1:D2}", 
                     jewelryType: jewelryType,
                     photo: imagePath
