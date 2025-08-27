@@ -869,8 +869,8 @@
                                                                         <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
                                                                         <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
                                                                         <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="Ожидается" FontSize="14" Foreground="Gray"/>
+                                                                        <TextBlock Text=" | Status: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                             </Grid>
@@ -1361,8 +1361,8 @@
                                                                         </StackPanel>
                                                                     </Grid>
                                                                     <Border HorizontalAlignment="Left" Width="150" Margin="20,8,0,0">
-                                                                        <TextBlock Text="FOUND" 
-                                                                                   FontSize="15" Foreground="#27AE60" FontWeight="Bold" 
+                                                                        <TextBlock Text="{Binding Status}" 
+                                                                                   FontSize="15" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold" 
                                                                                    HorizontalAlignment="Center"/>
                                                                     </Border>
                                                                 </StackPanel>
@@ -1412,8 +1412,8 @@
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="Auto"/>
-                                                                    <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 
                                                                 <!-- Incremental number in top-left corner -->
@@ -1424,21 +1424,7 @@
                                                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                                 </Border>
                                                                 
-                                                                <StackPanel Grid.Column="1">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
-                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Время: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="14" Foreground="Gray"/>
-                                                                    </StackPanel>
-                                                                </StackPanel>
-                                                                
-                                                                <Border Grid.Column="2" Width="80" Height="60" Margin="10,0,0,0"
+                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="0,0,10,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -1468,6 +1454,20 @@
                                                                         </TextBlock>
                                                                     </Grid>
                                                                 </Border>
+                                                                
+                                                                <StackPanel Grid.Column="2">
+                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
+                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
+                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
+                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
+                                                                        <TextBlock Text=" | Status: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold"/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
                                                             </Grid>
                                                         </Border>
                                                     </DataTemplate>
@@ -1962,8 +1962,8 @@
                                                                         </StackPanel>
                                                                     </Grid>
                                                                     <Border HorizontalAlignment="Left" Width="150" Margin="20,8,0,0">
-                                                                        <TextBlock Text="MISSING" 
-                                                                                   FontSize="15" Foreground="#E74C3C" FontWeight="Bold" 
+                                                                        <TextBlock Text="{Binding Status}" 
+                                                                                   FontSize="15" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold" 
                                                                                    HorizontalAlignment="Center"/>
                                                                     </Border>
                                                                 </StackPanel>
@@ -2065,8 +2065,8 @@
                                                                         <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
                                                                         <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
                                                                         <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="Не найдено" FontSize="14" Foreground="#E74C3C" FontWeight="Bold"/>
+                                                                        <TextBlock Text=" | Status: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                             </Grid>
@@ -2557,8 +2557,8 @@
                                                                         </StackPanel>
                                                                     </Grid>
                                                                     <Border HorizontalAlignment="Left" Width="150" Margin="20,8,0,0">
-                                                                        <TextBlock Text="EXTRA" 
-                                                                                   FontSize="15" Foreground="#F39C12" FontWeight="Bold" 
+                                                                        <TextBlock Text="{Binding Status}" 
+                                                                                   FontSize="15" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold" 
                                                                                    HorizontalAlignment="Center"/>
                                                                     </Border>
                                                                 </StackPanel>
@@ -2660,10 +2660,8 @@
                                                                         <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
                                                                         <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
                                                                         <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Время: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" FontSize="14" Foreground="Gray"/>
-                                                                        <TextBlock Text=" | Статус: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="Не ожидается" FontSize="14" Foreground="#F39C12" FontWeight="Bold"/>
+                                                                        <TextBlock Text=" | Status: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold"/>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                             </Grid>
