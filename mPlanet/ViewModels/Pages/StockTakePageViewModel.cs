@@ -212,7 +212,10 @@ namespace mPlanet.ViewModels.Pages
                     photo: imagePath
                 );
                 
-                ExpectedTags.Add(new TagInfo($"PC{i:D4}", $"E200001{i:D8}", "0", jewelryInfo));
+                // Use predefined EPC codes
+                string[] epcCodes = { "001667", "001669", "001621", "000687", "001660", "001661" };
+                string epc = epcCodes[(i - 1) % epcCodes.Length];
+                ExpectedTags.Add(new TagInfo($"PC{i:D4}", epc, "0", jewelryInfo));
             }
             ExpectedCount = ExpectedTags.Count;
             _navigationService.UpdateStatusMessage($"Добавлено {ExpectedCount} тестовых ожидаемых меток");

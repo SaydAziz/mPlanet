@@ -734,18 +734,44 @@
                                                                 </Border>
                                                                 
                                                                 <!-- Tag Information at top -->
-                                                                <StackPanel Grid.Row="0" Margin="0,0,0,5">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
-                                                                               TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" 
-                                                                               Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" 
-                                                                               Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
-                                                                               Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="Ожидается" 
-                                                                               FontSize="14" Foreground="#3498DB" FontWeight="Bold" 
-                                                                               HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                <StackPanel Grid.Row="0" Margin="20,15,5,5">
+                                                                    <!-- Row 1: Code and Box -->
+                                                                    <Grid Margin="0,2,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="110"/>
+                                                                            <ColumnDefinition Width="5"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                                            <TextBlock Text="Code: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="15"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                                            <TextBlock Text="Box: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="15" Foreground="Blue"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <!-- Row 2: Type and ID -->
+                                                                    <Grid Margin="0,2,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="110"/>
+                                                                            <ColumnDefinition Width="5"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                                            <TextBlock Text="Type: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="15" Foreground="DarkGreen"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                                            <TextBlock Text="ID: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="15" Foreground="Purple"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <Border HorizontalAlignment="Left" Width="150" Margin="10,8,0,0">
+                                                                        <TextBlock Text="Ожидается" 
+                                                                                   FontSize="15" Foreground="#3498DB" FontWeight="Bold" 
+                                                                                   HorizontalAlignment="Center"/>
+                                                                    </Border>
                                                                 </StackPanel>
                                                                 
                                                                 <!-- Photo at bottom -->
@@ -1305,17 +1331,44 @@
                                                                 </Border>
                                                                 
                                                                 <!-- Tag Information at top -->
-                                                                <StackPanel Grid.Row="0" Margin="0,0,0,5">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
-                                                                               TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" 
-                                                                               Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" 
-                                                                               Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
-                                                                               Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
-                                                                               FontSize="14" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                <StackPanel Grid.Row="0" Margin="20,15,5,5">
+                                                                    <!-- Row 1: Code and Box -->
+                                                                    <Grid Margin="0,2,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="110"/>
+                                                                            <ColumnDefinition Width="5"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                                            <TextBlock Text="Code: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="15"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                                            <TextBlock Text="Box: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="15" Foreground="Blue"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <!-- Row 2: Type and ID -->
+                                                                    <Grid Margin="0,2,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="110"/>
+                                                                            <ColumnDefinition Width="5"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                                            <TextBlock Text="Type: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="15" Foreground="DarkGreen"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                                            <TextBlock Text="ID: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="15" Foreground="Purple"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <Border HorizontalAlignment="Left" Width="150" Margin="10,8,0,0">
+                                                                        <TextBlock Text="FOUND" 
+                                                                                   FontSize="15" Foreground="#27AE60" FontWeight="Bold" 
+                                                                                   HorizontalAlignment="Center"/>
+                                                                    </Border>
                                                                 </StackPanel>
                                                                 
                                                                 <!-- Photo at bottom -->
@@ -1881,18 +1934,44 @@
                                                                 </Border>
                                                                 
                                                                 <!-- Tag Information at top -->
-                                                                <StackPanel Grid.Row="0" Margin="0,0,0,5">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
-                                                                               TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" 
-                                                                               Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" 
-                                                                               Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
-                                                                               Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="Не найдено" 
-                                                                               FontSize="14" Foreground="#E74C3C" FontWeight="Bold" 
-                                                                               HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                <StackPanel Grid.Row="0" Margin="20,15,5,5">
+                                                                    <!-- Row 1: Code and Box -->
+                                                                    <Grid Margin="0,2,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="110"/>
+                                                                            <ColumnDefinition Width="5"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                                            <TextBlock Text="Code: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="15"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                                            <TextBlock Text="Box: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="15" Foreground="Blue"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <!-- Row 2: Type and ID -->
+                                                                    <Grid Margin="0,2,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="110"/>
+                                                                            <ColumnDefinition Width="5"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                                            <TextBlock Text="Type: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="15" Foreground="DarkGreen"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                                            <TextBlock Text="ID: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="15" Foreground="Purple"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <Border HorizontalAlignment="Left" Width="150" Margin="10,8,0,0">
+                                                                        <TextBlock Text="MISSING" 
+                                                                                   FontSize="15" Foreground="#E74C3C" FontWeight="Bold" 
+                                                                                   HorizontalAlignment="Center"/>
+                                                                    </Border>
                                                                 </StackPanel>
                                                                 
                                                                 <!-- Photo at bottom -->
@@ -2452,20 +2531,44 @@
                                                                 </Border>
                                                                 
                                                                 <!-- Tag Information at top -->
-                                                                <StackPanel Grid.Row="0" Margin="0,0,0,5">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="16" 
-                                                                               TextWrapping="Wrap" HorizontalAlignment="Center"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" 
-                                                                               Foreground="Blue" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" 
-                                                                               Foreground="DarkGreen" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" 
-                                                                               Foreground="Purple" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="{Binding ScanTime, StringFormat='{}{0:HH:mm:ss}'}" 
-                                                                               FontSize="14" Foreground="Gray" HorizontalAlignment="Center" Margin="0,1,0,0"/>
-                                                                    <TextBlock Text="Не ожидается" 
-                                                                               FontSize="14" Foreground="#F39C12" FontWeight="Bold" 
-                                                                               HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                <StackPanel Grid.Row="0" Margin="20,15,5,5">
+                                                                    <!-- Row 1: Code and Box -->
+                                                                    <Grid Margin="0,2,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="110"/>
+                                                                            <ColumnDefinition Width="5"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                                            <TextBlock Text="Code: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="15"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                                            <TextBlock Text="Box: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="15" Foreground="Blue"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <!-- Row 2: Type and ID -->
+                                                                    <Grid Margin="0,2,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="110"/>
+                                                                            <ColumnDefinition Width="5"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                                            <TextBlock Text="Type: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="15" Foreground="DarkGreen"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                                            <TextBlock Text="ID: " FontSize="15" Foreground="Gray"/>
+                                                                            <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="15" Foreground="Purple"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <Border HorizontalAlignment="Left" Width="150" Margin="10,8,0,0">
+                                                                        <TextBlock Text="EXTRA" 
+                                                                                   FontSize="15" Foreground="#F39C12" FontWeight="Bold" 
+                                                                                   HorizontalAlignment="Center"/>
+                                                                    </Border>
                                                                 </StackPanel>
                                                                 
                                                                 <!-- Photo at bottom -->
