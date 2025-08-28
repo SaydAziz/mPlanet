@@ -18,7 +18,7 @@ namespace mPlanet.ViewModels.Pages
         private string _currentView = "Missing"; // Default to Missing view
         
         // Settings for taglist views
-        private bool _showPhotos = false;
+        private bool _showPhotos = true;
         private bool _isGridView = true; // true for grid view, false for list view
 
         // Collections
@@ -109,7 +109,14 @@ namespace mPlanet.ViewModels.Pages
         public bool IsGridView
         {
             get => _isGridView;
-            set => SetProperty(ref _isGridView, value);
+            set 
+            {
+                SetProperty(ref _isGridView, value);
+                if (value) // If grid view is selected, always enable photos
+                {
+                    ShowPhotos = true;
+                }
+            }
         }
 
         // Commands

@@ -317,7 +317,7 @@
                         <!-- Settings Panel for Expected View -->
                         <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Margin="10,5,10,10">
                             <StackPanel Orientation="Horizontal" Margin="10,8">
-                                <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
+                                <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" IsEnabled="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" ToolTip="Фото всегда включены в режиме сетки" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
                                 <TextBlock Text="Вид:" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                 <Border CornerRadius="6" Margin="0,0,5,0">
@@ -953,7 +953,7 @@
                         <!-- Settings Panel for Found View -->
                         <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Margin="10,5,10,10">
                             <StackPanel Orientation="Horizontal" Margin="10,8">
-                                <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
+                                <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" IsEnabled="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" ToolTip="Фото всегда включены в режиме сетки" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
                                 <TextBlock Text="Вид:" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                 <Border CornerRadius="6" Margin="0,0,5,0">
@@ -1595,7 +1595,7 @@
                         <!-- Settings Panel for Missing View -->
                         <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Margin="10,5,10,10">
                             <StackPanel Orientation="Horizontal" Margin="10,8">
-                                <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
+                                <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" IsEnabled="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" ToolTip="Фото всегда включены в режиме сетки" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
                                 <TextBlock Text="Вид:" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                 <Border CornerRadius="6" Margin="0,0,5,0">
@@ -2231,7 +2231,7 @@
                         <!-- Settings Panel for Extra View -->
                         <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Margin="10,5,10,10">
                             <StackPanel Orientation="Horizontal" Margin="10,8">
-                                <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" 
+                                <CheckBox Content="Фото" IsChecked="{Binding ShowPhotos}" IsEnabled="{Binding IsGridView, Converter={StaticResource InverseBooleanConverter}}" ToolTip="Фото всегда включены в режиме сетки" 
                                           VerticalAlignment="Center" Margin="0,0,20,0"/>
                                 <TextBlock Text="Вид:" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                 <Border CornerRadius="6" Margin="0,0,5,0">
