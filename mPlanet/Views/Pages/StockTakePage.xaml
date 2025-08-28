@@ -870,7 +870,7 @@
                                                                         <ColumnDefinition Width="60"/>
                                                                         <ColumnDefinition Width="80"/>
                                                                         <ColumnDefinition Width="156"/>
-                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="100"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     
                                                                     <!-- Headers -->
@@ -1499,7 +1499,7 @@
                                                                         <ColumnDefinition Width="60"/>
                                                                         <ColumnDefinition Width="80"/>
                                                                         <ColumnDefinition Width="156"/>
-                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="100"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     
                                                                     <!-- Headers -->
@@ -2134,7 +2134,7 @@
                                                                         <ColumnDefinition Width="60"/>
                                                                         <ColumnDefinition Width="80"/>
                                                                         <ColumnDefinition Width="156"/>
-                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="100"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     
                                                                     <!-- Headers -->
@@ -2763,7 +2763,7 @@
                                                                         <ColumnDefinition Width="60"/>
                                                                         <ColumnDefinition Width="80"/>
                                                                         <ColumnDefinition Width="156"/>
-                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="100"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     
                                                                     <!-- Headers -->
