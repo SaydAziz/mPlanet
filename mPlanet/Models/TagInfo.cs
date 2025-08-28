@@ -25,6 +25,20 @@ namespace mPlanet.Models
             }
         }
 
+        private string _notes = "";
+        public string Notes 
+        { 
+            get => _notes;
+            set
+            {
+                if (_notes != value)
+                {
+                    _notes = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public TagInfo(string pc, string epc, string rssi, IProductInfo productInfo = null)
