@@ -829,7 +829,7 @@
                                                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                                 </Border>
                                                                 
-                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="0,0,10,0"
+                                                                <Border Grid.Column="1" Width="120" Height="90" Margin="0,0,10,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -860,19 +860,53 @@
                                                                     </Grid>
                                                                 </Border>
                                                                 
-                                                                <StackPanel Grid.Column="2">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
-                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Status: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold"/>
-                                                                    </StackPanel>
-                                                                </StackPanel>
+                                                                <Grid Grid.Column="2">
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="68"/>
+                                                                        <ColumnDefinition Width="60"/>
+                                                                        <ColumnDefinition Width="80"/>
+                                                                        <ColumnDefinition Width="156"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    
+                                                                    <!-- Headers -->
+                                                                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1" Background="#F8F8F8">
+                                                                        <TextBlock Text="EPC" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Box" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Type" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="3" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="ID" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="4" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Status" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    
+                                                                    <!-- Values -->
+                                                                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding EPC}" FontSize="14" Foreground="Black" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="3" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="4" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                </Grid>
                                                             </Grid>
                                                         </Border>
                                                     </DataTemplate>
@@ -1424,7 +1458,7 @@
                                                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                                 </Border>
                                                                 
-                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="0,0,10,0"
+                                                                <Border Grid.Column="1" Width="120" Height="90" Margin="0,0,10,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -1455,19 +1489,53 @@
                                                                     </Grid>
                                                                 </Border>
                                                                 
-                                                                <StackPanel Grid.Column="2">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
-                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Status: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold"/>
-                                                                    </StackPanel>
-                                                                </StackPanel>
+                                                                <Grid Grid.Column="2">
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="68"/>
+                                                                        <ColumnDefinition Width="60"/>
+                                                                        <ColumnDefinition Width="80"/>
+                                                                        <ColumnDefinition Width="156"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    
+                                                                    <!-- Headers -->
+                                                                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1" Background="#F8F8F8">
+                                                                        <TextBlock Text="EPC" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Box" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Type" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="3" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="ID" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="4" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Status" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    
+                                                                    <!-- Values -->
+                                                                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding EPC}" FontSize="14" Foreground="Black" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="3" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="4" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                </Grid>
                                                             </Grid>
                                                         </Border>
                                                     </DataTemplate>
@@ -2025,7 +2093,7 @@
                                                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                                 </Border>
                                                                 
-                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="0,0,10,0"
+                                                                <Border Grid.Column="1" Width="120" Height="90" Margin="0,0,10,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -2056,19 +2124,53 @@
                                                                     </Grid>
                                                                 </Border>
                                                                 
-                                                                <StackPanel Grid.Column="2">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
-                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Status: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold"/>
-                                                                    </StackPanel>
-                                                                </StackPanel>
+                                                                <Grid Grid.Column="2">
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="68"/>
+                                                                        <ColumnDefinition Width="60"/>
+                                                                        <ColumnDefinition Width="80"/>
+                                                                        <ColumnDefinition Width="156"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    
+                                                                    <!-- Headers -->
+                                                                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1" Background="#F8F8F8">
+                                                                        <TextBlock Text="EPC" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Box" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Type" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="3" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="ID" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="4" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Status" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    
+                                                                    <!-- Values -->
+                                                                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding EPC}" FontSize="14" Foreground="Black" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="3" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="4" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                </Grid>
                                                             </Grid>
                                                         </Border>
                                                     </DataTemplate>
@@ -2620,7 +2722,7 @@
                                                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                                 </Border>
                                                                 
-                                                                <Border Grid.Column="1" Width="80" Height="60" Margin="0,0,10,0"
+                                                                <Border Grid.Column="1" Width="120" Height="90" Margin="0,0,10,0"
                                                                         Background="#F0F0F0" BorderBrush="#BDC3C7" BorderThickness="1">
                                                                     <Border.Visibility>
                                                                         <MultiBinding Converter="{StaticResource PhotoVisibilityConverter}">
@@ -2651,19 +2753,53 @@
                                                                     </Grid>
                                                                 </Border>
                                                                 
-                                                                <StackPanel Grid.Column="2">
-                                                                    <TextBlock Text="{Binding EPC}" FontWeight="Bold" FontSize="14"/>
-                                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                                                        <TextBlock Text="Box: " FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue"/>
-                                                                        <TextBlock Text=" | Type: " FontSize="14" Foreground="DarkGreen" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen"/>
-                                                                        <TextBlock Text=" | ID: " FontSize="14" Foreground="Purple" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple"/>
-                                                                        <TextBlock Text=" | Status: " FontSize="14" Foreground="Gray" Margin="10,0,0,0"/>
-                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold"/>
-                                                                    </StackPanel>
-                                                                </StackPanel>
+                                                                <Grid Grid.Column="2">
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="68"/>
+                                                                        <ColumnDefinition Width="60"/>
+                                                                        <ColumnDefinition Width="80"/>
+                                                                        <ColumnDefinition Width="156"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    
+                                                                    <!-- Headers -->
+                                                                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1" Background="#F8F8F8">
+                                                                        <TextBlock Text="EPC" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Box" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Type" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="3" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="ID" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="0" Grid.Column="4" BorderBrush="#CCCCCC" BorderThickness="1,1,1,1" Background="#F8F8F8">
+                                                                        <TextBlock Text="Status" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                    
+                                                                    <!-- Values -->
+                                                                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding EPC}" FontSize="14" Foreground="Black" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.BoxNumber}" FontSize="14" Foreground="Blue" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.JewelryType}" FontSize="14" Foreground="DarkGreen" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="3" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding ProductInfo.ProductId}" FontSize="14" Foreground="Purple" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                    <Border Grid.Row="1" Grid.Column="4" BorderBrush="#CCCCCC" BorderThickness="0,0,1,1" Background="White">
+                                                                        <TextBlock Text="{Binding Status}" FontSize="14" Foreground="{Binding Status, Converter={StaticResource StatusColorConverter}}" FontWeight="Bold" Margin="5" HorizontalAlignment="Left"/>
+                                                                    </Border>
+                                                                </Grid>
                                                             </Grid>
                                                         </Border>
                                                     </DataTemplate>
