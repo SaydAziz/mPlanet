@@ -12,6 +12,8 @@ namespace mPlanet.ViewModels.Pages
 {
     public class SettingsPageViewModel : PageViewModelBase
     {
+        private string _scannerModel = "HW6";
+        private int _comPort = 6;
         private int _scannerPower = AppSettings.Scanner.DefaultPower;
         private int _scannerFrequency = AppSettings.Scanner.DefaultFrequency;
         private int _scannerSensitivity = AppSettings.Scanner.DefaultSensitivity;
@@ -20,6 +22,20 @@ namespace mPlanet.ViewModels.Pages
         private bool _startWithWindows = false;
         private bool _minimizeToTray = false;
         private string _selectedLanguage = "Русский";
+        private bool _scannerStatus = false;
+        private string _eventLog = "";
+
+        public string ScannerModel
+        {
+            get => _scannerModel;
+            set => SetProperty(ref _scannerModel, value);
+        }
+
+        public int ComPort
+        {
+            get => _comPort;
+            set => SetProperty(ref _comPort, value);
+        }
 
         public int ScannerPower
         {
@@ -37,6 +53,24 @@ namespace mPlanet.ViewModels.Pages
         {
             get => _scannerSensitivity;
             set => SetProperty(ref _scannerSensitivity, value);
+        }
+
+        public bool ScannerStatus
+        {
+            get => _scannerStatus;
+            set
+            {
+                SetProperty(ref _scannerStatus, value);
+                OnPropertyChanged(nameof(StatusIndicatorColor));
+            }
+        }
+
+        public string StatusIndicatorColor => _scannerStatus ? "Green" : "Red";
+
+        public string EventLog
+        {
+            get => _eventLog;
+            set => SetProperty(ref _eventLog, value);
         }
 
         public string ExportPath
@@ -74,10 +108,17 @@ namespace mPlanet.ViewModels.Pages
             "Русский", "English"
         };
 
+        public List<string> AvailableModels { get; } = new List<string>
+        {
+            "HW6", "HW5", "HW4"
+        };
+
         public ICommand BrowseExportPathCommand { get; }
         public ICommand SaveSettingsCommand { get; }
         public ICommand CancelSettingsCommand { get; }
         public ICommand ResetToDefaultsCommand { get; }
+        public ICommand TurnOnScannerCommand { get; }
+        public ICommand TurnOffScannerCommand { get; }
 
         public SettingsPageViewModel(INavigationService navigationService) 
             : base(navigationService)
@@ -86,6 +127,10 @@ namespace mPlanet.ViewModels.Pages
             SaveSettingsCommand = new RelayCommand(_ => ExecuteSaveSettings());
             CancelSettingsCommand = new RelayCommand(_ => ExecuteCancelSettings());
             ResetToDefaultsCommand = new RelayCommand(_ => ExecuteResetToDefaults());
+            TurnOnScannerCommand = new RelayCommand(_ => ExecuteTurnOnScanner());
+            TurnOffScannerCommand = new RelayCommand(_ => ExecuteTurnOffScanner());
+
+            EventLog = "Добро пожаловать в настройки сканера\nСистема готова к работе\n";
         }
 
         private void ExecuteBrowseExportPath()
@@ -127,6 +172,8 @@ namespace mPlanet.ViewModels.Pages
         {
             _navigationService.UpdateStatusMessage("Сброс настроек к значениям по умолчанию...");
             
+            ScannerModel = "HW6";
+            ComPort = 6;
             ScannerPower = AppSettings.Scanner.DefaultPower;
             ScannerFrequency = AppSettings.Scanner.DefaultFrequency;
             ScannerSensitivity = AppSettings.Scanner.DefaultSensitivity;
@@ -135,8 +182,30 @@ namespace mPlanet.ViewModels.Pages
             StartWithWindows = AppSettings.StartWithWindows;
             MinimizeToTray = AppSettings.MinimizeToTray;
             SelectedLanguage = AppSettings.DefaultLanguage;
+            ScannerStatus = false;
             
+            AddToEventLog("Настройки сброшены к значениям по умолчанию");
             _navigationService.UpdateStatusMessage("Настройки сброшены к значениям по умолчанию.");
+        }
+
+        private void ExecuteTurnOnScanner()
+        {
+            ScannerStatus = true;
+            AddToEventLog("Сканер включен");
+            _navigationService.UpdateStatusMessage("Сканер включен");
+        }
+
+        private void ExecuteTurnOffScanner()
+        {
+            ScannerStatus = false;
+            AddToEventLog("Сканер выключен");
+            _navigationService.UpdateStatusMessage("Сканер выключен");
+        }
+
+        private void AddToEventLog(string message)
+        {
+            var timestamp = DateTime.Now.ToString("HH:mm:ss");
+            EventLog += $"[{timestamp}] {message}\n";
         }
 
         public override void OnNavigatedTo()

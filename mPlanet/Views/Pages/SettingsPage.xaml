@@ -5,70 +5,143 @@
 
     <Grid Background="White" Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Page Header -->
-        <TextBlock Grid.Row="0" 
-                   Text="Настройки приложения"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   Foreground="#34495E"
-                   Margin="0,0,0,20"/>
+        <!-- Main Content Grid -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Settings Content -->
-        <ScrollViewer Grid.Row="1">
-            <StackPanel>
+            <!-- Left Column - Settings -->
+            <StackPanel Grid.Column="0" Margin="0,0,10,0">
                 <!-- Scanner Settings -->
                 <GroupBox Header="Настройки сканера" Margin="0,0,0,20">
-                    <Grid Margin="15">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
+                    <StackPanel Margin="15">
+                        <!-- First Row: Model, COM Port, Frequency -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="Мощность:"/>
-                        <Slider Grid.Row="0" Grid.Column="1" 
-                                Value="{Binding ScannerPower}" 
-                                Minimum="1" Maximum="100"
-                                TickPlacement="BottomRight"
-                                TickFrequency="10"
-                                Margin="5"/>
-                        <TextBlock Grid.Row="0" Grid.Column="2" 
-                                   Text="{Binding ScannerPower}"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                            <!-- Model -->
+                            <Label Grid.Column="0" Content="Модель" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" 
+                                      SelectedItem="{Binding ScannerModel}"
+                                      ItemsSource="{Binding AvailableModels}"
+                                      Margin="5"/>
 
-                        <Label Grid.Row="1" Grid.Column="0" Content="Частота (MHz):"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" 
-                                 Text="{Binding ScannerFrequency}" 
-                                 Margin="5"/>
+                            <!-- COM Port -->
+                            <Label Grid.Column="3" Content="COM порт" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                            <TextBox Grid.Column="4" 
+                                     Text="{Binding ComPort}" 
+                                     Margin="5"/>
 
-                        <Label Grid.Row="2" Grid.Column="0" Content="Чувствительность:"/>
-                        <Slider Grid.Row="2" Grid.Column="1" 
-                                Value="{Binding ScannerSensitivity}" 
-                                Minimum="1" Maximum="100"
-                                TickPlacement="BottomRight"
-                                TickFrequency="10"
-                                Margin="5"/>
-                        <TextBlock Grid.Row="2" Grid.Column="2" 
-                                   Text="{Binding ScannerSensitivity}"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
-                    </Grid>
+                            <!-- Frequency -->
+                            <Label Grid.Column="6" Content="Частота (MHz)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,0"/>
+                            <TextBox Grid.Column="7" 
+                                     Text="{Binding ScannerFrequency}" 
+                                     Margin="15,5,5,5"
+                                     HorizontalAlignment="Left"/>
+                        </Grid>
+
+                        <!-- Second Row: Power -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="5"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Content="Мощность" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1"
+                                    Value="{Binding ScannerPower}" 
+                                    Minimum="0" Maximum="30"
+                                    TickPlacement="BottomRight"
+                                    TickFrequency="5"
+                                    Margin="5"/>
+                            <TextBlock Grid.Column="2" 
+                                       Text="{Binding ScannerPower}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Third Row: Sensitivity -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="5"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Content="Чувствительность" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1"
+                                    Value="{Binding ScannerSensitivity}" 
+                                    Minimum="0" Maximum="99"
+                                    TickPlacement="BottomRight"
+                                    TickFrequency="10"
+                                    Margin="5"/>
+                            <TextBlock Grid.Column="2" 
+                                       Text="{Binding ScannerSensitivity}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Fourth Row: Status -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="65"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Content="Статус" VerticalAlignment="Center"/>
+                            <Ellipse Grid.Column="1" 
+                                     Width="25" Height="25"
+                                     Fill="{Binding StatusIndicatorColor}"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Margin="5"/>
+                            <Button Grid.Column="2" 
+                                    Content="ВКЛ" 
+                                    Command="{Binding TurnOnScannerCommand}"
+                                    Margin="5,2,2,2"
+                                    Padding="5,2"/>
+                            <Button Grid.Column="4" 
+                                    Content="ВЫКЛ" 
+                                    Command="{Binding TurnOffScannerCommand}"
+                                    Margin="2,2,5,2"
+                                    Padding="5,2"/>
+                        </Grid>
+                    </StackPanel>
                 </GroupBox>
 
-                <!-- Export Settings -->
-                <GroupBox Header="Настройки экспорта" Margin="0,0,0,20">
+                <!-- General Settings -->
+                <GroupBox Header="Общие">
                     <StackPanel Margin="15">
+                        <CheckBox Content="Запускать при старте Windows"
+                                  IsChecked="{Binding StartWithWindows}"
+                                  Margin="0,0,0,10"/>
+                        
+                        <CheckBox Content="Свернуть в системный трей"
+                                  IsChecked="{Binding MinimizeToTray}"
+                                  Margin="0,0,0,10"/>
+
                         <Grid Margin="0,0,0,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="150"/>
@@ -81,26 +154,13 @@
                                      Text="{Binding ExportPath}" 
                                      Margin="5,0"/>
                             <Button Grid.Column="2" 
-                                    Content="Обзор..." 
+                                    Content="обзор" 
                                     Command="{Binding BrowseExportPathCommand}"
                                     Margin="5,0,0,0"/>
                         </Grid>
 
-                        <CheckBox Content="Автоматически открывать папку после экспорта"
+                        <CheckBox Content="Открывать папку после экспорта"
                                   IsChecked="{Binding AutoOpenExportFolder}"
-                                  Margin="0,10,0,0"/>
-                    </StackPanel>
-                </GroupBox>
-
-                <!-- Application Settings -->
-                <GroupBox Header="Настройки приложения">
-                    <StackPanel Margin="15">
-                        <CheckBox Content="Запускать при старте Windows"
-                                  IsChecked="{Binding StartWithWindows}"
-                                  Margin="0,0,0,10"/>
-                        
-                        <CheckBox Content="Минимизировать в системный трей"
-                                  IsChecked="{Binding MinimizeToTray}"
                                   Margin="0,0,0,10"/>
 
                         <Grid>
@@ -118,22 +178,35 @@
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
-        </ScrollViewer>
+
+            <!-- Right Column - Event Log -->
+            <GroupBox Grid.Column="1" Header="Журнал событий" Margin="10,0,0,0">
+                <ScrollViewer>
+                    <TextBox Text="{Binding EventLog}"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"
+                             BorderThickness="0"
+                             Background="Transparent"/>
+                </ScrollViewer>
+            </GroupBox>
+        </Grid>
 
         <!-- Action Buttons -->
-        <StackPanel Grid.Row="2" 
+        <StackPanel Grid.Row="1" 
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
+                    HorizontalAlignment="Center" 
                     Margin="0,20,0,0">
-            <Button Content="Сбросить по умолчанию" 
+            <Button Content="Сбросить настройки" 
                     Command="{Binding ResetToDefaultsCommand}"
                     Margin="0,0,10,0"
                     Padding="15,5"/>
-            <Button Content="Сохранить" 
+            <Button Content="сохранить" 
                     Command="{Binding SaveSettingsCommand}"
                     Margin="0,0,10,0"
                     Padding="15,5"/>
-            <Button Content="Отмена" 
+            <Button Content="отмена" 
                     Command="{Binding CancelSettingsCommand}"
                     Padding="15,5"/>
         </StackPanel>
